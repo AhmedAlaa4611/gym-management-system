@@ -1,0 +1,51 @@
+name: Run PHPUnit Test && Pint && Aspell
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  laravel:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.3
+        extensions: json, dom, curl, libxml, mbstring, bcmath, sqlite, pdo, pdo_mysql
+        ini-values: post_max_size=256M, upload_max_filesize=256M
+        coverage: none
+
+    - name: Install Dependencies
+      run: composer install --prefer-dist --no-progress --no-suggest --no-interaction
+
+    - name: Install Aspell
+      run: |
+        sudo apt-get install aspell aspell-en aspell-ar
+        composer require peckphp/peck
+        vendor/bin/peck --init
+
+    - name: Create Environment File
+      run: cp .env.example .env
+
+    - name: Generate Application Key
+      run: php artisan key:generate
+
+    - name: Set Up SQLite Database
+      run: touch database/database.sqlite
+
+    - name: Run Migrations
+      run: php artisan migrate
+
+    - name: Run Tests
+      run: php artisan test
+
+    - name: Run Pint
+      run: vendor/bin/pint
+
+    - name: Run Laravel Aspell
+      run: vendor/bin/peck
