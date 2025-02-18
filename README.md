@@ -20,3 +20,10 @@ php artisan migrate
 ```sh
 php artisan serve
 ```
+
+## Running Laravel Pint Before Pushing Changes
+Laravel Pint is a code style fixer for PHP. Before pushing your changes to GitHub, you should run Pint to ensure your code follows Laravel's coding standards.
+
+```sh
+./vendor/bin/pint
+```
