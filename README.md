@@ -27,3 +27,21 @@ Laravel Pint is a code style fixer for PHP. Before pushing your changes to GitHu
 ```sh
 ./vendor/bin/pint
 ```
+
+## Recommended VS Code Settings
+To ensure a consistent development experience, add the following settings to your `settings.json` `user file` `ctrl+shift+p` in VS Code:
+
+```json
+{
+    "files.autoSave": "afterDelay",
+    "files.trimTrailingWhitespace": true,
+    "files.trimFinalNewlines": true,
+    "files.eol": "\n",
+}
+```
+
+These settings will:
+- **Automatically save files after a short delay** instead of requiring manual saving.
+- **Remove trailing whitespace** at the end of lines to keep files clean.
+- **Ensure the final line of a file doesn’t have extra newlines**, maintaining a consistent file structure.
+- **Set the end-of-line character to `\n` (LF)** to avoid inconsistencies between different operating systems.
