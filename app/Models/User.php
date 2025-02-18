@@ -17,6 +17,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_admin',
+        'type',
+        'gender',
+        'date_of_birth',
+        'phone',
+        'bio',
+        'image',
     ];
 
     /**
@@ -35,6 +42,17 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'date_of_birth' => 'datetime',
         ];
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function period()
+    {
+        return $this->belongsTo(Period::class);
     }
 }
