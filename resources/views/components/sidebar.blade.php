@@ -5,6 +5,7 @@
     <hr class="my-2">
     <ul class="nav nav-pills flex-column mb-auto">
         <x-sidebar-link href="/" :current-page="request()->is('/')">Home</x-sidebar-link>
+        <x-sidebar-link href="/period" :current-page="request()->is('/period')">Priod</x-sidebar-link>
     </ul>
     <hr class="my-2">
     <button class="btn btn-primary" id="theme" aria-label="Toggle theme">
@@ -16,7 +17,7 @@
     @auth
         <div class="dropdown">
             <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://github.com/mdo.png" alt="{{ Auth::user()->name }}" width="32" height="32" class="rounded-circle me-2">
+                <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="{{ Auth::user()->name }}" width="32" height="32" class="rounded-circle me-2">
                 <strong>{{ Auth::user()->name }}</strong>
             </a>
             <ul class="dropdown-menu text-small shadow">

@@ -13,10 +13,11 @@ class Period extends Model
         'end_time',
         'day',
         'coach_name',
+        'user_id'
     ];
 
-    public function users()
+    public function user()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
