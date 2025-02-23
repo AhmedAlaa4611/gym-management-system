@@ -13,11 +13,11 @@ class Period extends Model
         'end_time',
         'day',
         'coach_name',
-        'user_id'
+        'user_id',
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
 }

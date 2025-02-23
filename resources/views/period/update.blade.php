@@ -10,18 +10,21 @@
                 <x-forms.input 
                     name="name" 
                     label="Class Name" 
+                    type="text"
                     :value="old('name', $period->name)" 
                 > Class Name </x-forms.input>
                 
                 <x-forms.textarea 
                     name="description" 
                     label="Description"
+                    type="text"
                     :value="old('description', $period->description)" 
                 >Description</x-forms.textarea>
                 
                 <x-forms.input 
                     name="coach_name" 
                     label="Coach Name" 
+                    type="text"
                     :value="old('coach_name', $period->coach_name)" 
                 >Coach Name </x-forms.input>
                                 

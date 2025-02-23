@@ -26,6 +26,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'min:6', 'max:255', 'confirmed'],
+            'password_confirmation' => ['required', 'min:6', 'max:255'],
             'gender' => ['required', 'in:male,female'],
             'type' => ['required', 'in:store_owner,gym_owner,admin,customer'],
             'date_of_birth' => ['nullable', 'date'],

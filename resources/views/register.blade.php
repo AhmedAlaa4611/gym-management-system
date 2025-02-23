@@ -11,8 +11,8 @@
         <x-forms.input type="password" name="password_confirmation">Password Confirmation</x-forms.input>
 
         <div class="col-12">
-            <x-forms.check type="radio" name="gender" value="male" :checked="old('gender') === 'male'">Male</x-forms.check>
-            <x-forms.check type="radio" name="gender" value="female" :checked="old('gender') === 'female'">Female</x-forms.check>
+            <x-forms.check type="radio" name="gender" value="male">Male</x-forms.check>
+            <x-forms.check type="radio" name="gender" value="female">Female</x-forms.check>
             <x-forms.error name="gender" />
         </div>
 

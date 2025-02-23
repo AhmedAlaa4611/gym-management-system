@@ -5,11 +5,11 @@
         <form action="{{ route('period.store') }}" method="POST">
             @csrf
             <div class="row">
-                <x-forms.input name="name" label="Class Name"> Name </x-forms.input>
+                <x-forms.input name="name" label="Class Name" type="text"> Name </x-forms.input>
                 
-                <x-forms.textarea name="description" label="Description"> Description </x-forms.input>
+                <x-forms.textarea name="description" label="Description" type="text"> Description </x-forms.input>
                 
-                <x-forms.input name="coach_name" label="Coach Name" >Coach Name</x-forms.input>
+                <x-forms.input name="coach_name" label="Coach Name" type="text">Coach Name</x-forms.input>
                                 
                 <x-forms.input name="start_time" label="Start Time" type="time" >Start Time </x-forms.input>
                 
