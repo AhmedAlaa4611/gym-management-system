@@ -13,6 +13,7 @@ class OrderProductController extends Controller
     public function index()
     {
         $orderproducts = OrderProduct::get();
+
         return view('OrderProducts.index', compact('orderproducts'));
     }
 
