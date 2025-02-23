@@ -19,10 +19,12 @@ return new class extends Migration
             $table->boolean('is_admin')->default(true);
             $table->enum('type', ['store_owner', 'gym_owner', 'admin', 'customer']);
             $table->enum('gender', ['male', 'female']);
-            $table->date('date_of_birth');
-            $table->string('phone', 11);
+            $table->date('date_of_birth')->nullable();
+            $table->string('phone', 11)->nullable();
             $table->text('bio')->nullable();
             $table->string('image')->nullable();
+            $table->string('location')->nullable();
+            $table->string('visa')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
