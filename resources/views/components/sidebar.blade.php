@@ -5,6 +5,7 @@
     <hr class="my-2">
     <ul class="nav nav-pills flex-column mb-auto">
         <x-sidebar-link href="/" :current-page="request()->is('/')">Home</x-sidebar-link>
+        <x-sidebar-link href="/products" :current-page="request()->is('products*')">Products</x-sidebar-link>
         @if (Auth::check() && Auth::user()->type === 'gym_owner')
             <x-sidebar-link href="/period" :current-page="request()->is('period')">Period</x-sidebar-link>
         @endif
