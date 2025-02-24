@@ -24,6 +24,8 @@ class User extends Authenticatable
         'phone',
         'bio',
         'image',
+        'location',
+        'visa',
     ];
 
     /**
@@ -51,8 +53,8 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
-    public function period()
+    public function periods()
     {
-        return $this->belongsTo(Period::class);
+        return $this->hasMany(Period::class);
     }
 }

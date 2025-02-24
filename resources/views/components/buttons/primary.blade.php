@@ -1,3 +1,7 @@
-@props(['url'])
+@props(['url' => null, 'type' => 'button'])
 
-<a href="{{ $url }}" class="btn btn-primary my-1">{{ $slot }}</a>
+@if($url)
+    <a href="{{ $url }}" class="btn btn-primary my-1">{{ $slot }}</a>
+@else
+    <button type="{{ $type }}" class="btn btn-primary my-1">{{ $slot }}</button>
+@endif
