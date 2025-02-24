@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\OrderProductController;
 use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -58,4 +59,17 @@ Route::controller(PeriodController::class)->group(function () {
 
     Route::get('/period/search', 'search')->name('period.search');
     Route::get('/period/{id}', 'show')->name('period.show');
+});
+
+Route::controller(ServiceController::class)->group(function () {
+    Route::get('/services/create', 'create')->name('service.create');
+    Route::post('/services/store', 'store')->name('service.store');
+    Route::get('/services', 'index')->name('services.index');
+
+    Route::get('/services/{id}/edit', 'edit')->name('service.edit');
+    Route::put('/services/{id}', 'update')->name('service.update');
+
+    Route::delete('/services/{id}', 'destroy')->name('service.destroy');
+
+    Route::get('/services/{id}', 'show')->name('service.show');
 });
