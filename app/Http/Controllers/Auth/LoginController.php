@@ -27,7 +27,11 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt($data, $request->has('remember'))) {
-            return redirect('/');
+            if (Auth::user()->type === 'customer') {
+                return redirect('/welcome');
+            } else{
+                return redirect('/home');
+            }
         }
 
         return back()->withErrors([

@@ -6,19 +6,33 @@
         <title>{{ config('app.name') }}</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('assets/css/sidebar.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/customer.css') }}">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     </head>
     <body class="d-flex vh-100">
-        @include('components.sidebar')
+        @if (Auth::check() && in_array(Auth::user()->type, ['Admin', 'gym_owner', 'store_owner']))
+            @include('components.sidebar')
+        @endif
 
         <div class="d-flex flex-column flex-grow-1 overflow-y-auto">
-            @include('components.nav')
+            @auth
+                @include('components.nav')
+            @endauth
 
-            <main class="container mb-auto mt-4">
-                <h1 class="mb-4">{{ $heading }}</h1>
-                {{ $slot }}
-            </main>
+            @if (Auth::check() && Auth::user()->type === 'customer')
+                <main class="mb-auto bg-black">
+                    {{ $slot }}
+                </main>
+            @else
+                <main class="container mb-auto mt-4">
+                    <h1 class="mb-4">{{ $heading }}</h1>
+                    {{ $slot }}
+                </main>
+            @endif
 
-            @include('components.footer')
+            @auth
+                @include('components.footer')
+            @endauth
         </div>
 
         {{-- scripts --}}

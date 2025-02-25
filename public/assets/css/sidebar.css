@@ -11,3 +11,8 @@ aside {
 .invalid-feedback {
     display: block;
 }
+
+.dropdown-toggle::after{
+    color: red;
+    font-size: 1.5rem;
+}
