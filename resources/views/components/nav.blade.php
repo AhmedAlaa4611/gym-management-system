@@ -39,8 +39,8 @@
                 </ul>
                 <div class="dropdown me-5">
                     <a href="#" class="nav-item d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="{{ Auth::user()->name }}" width="35" height="35" class="rounded-circle border border-danger me-2">
-                        <strong>{{ ucfirst(Auth::user()->name) }}</strong>
+                        <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="{{ Str::title(Auth::user()->name) }}" width="35" height="35" class="rounded-circle border border-danger me-2">
+                        <strong>{{ Str::title(Auth::user()->name) }}</strong>
                     </a>
                     <ul class="dropdown-menu text-small shadow" >
                         <li><a class="dropdown-item" href="#">New project...</a></li>

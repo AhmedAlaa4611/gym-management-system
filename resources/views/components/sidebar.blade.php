@@ -26,8 +26,8 @@
     @auth
         <div class="dropdown">
             <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="{{ Auth::user()->name }}" width="32" height="32" class="rounded-circle me-2">
-                <strong>{{ Auth::user()->name }}</strong>
+                <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="{{ Str::title(Auth::user()->name) }}" width="32" height="32" class="rounded-circle me-2">
+                <strong>{{ Str::title(Auth::user()->name) }}</strong>
             </a>
             <ul class="dropdown-menu text-small shadow">
                 <li><a class="dropdown-item" href="#">New project...</a></li>
