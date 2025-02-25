@@ -13,9 +13,9 @@
                     <div class="col-md-4">
                         <h5 class="text-danger">Working Hours</h5>
                         <ul class="list-unstyled">
-                        <li>Monday - Friday: 6 AM - 10 PM</li>
-                        <li>Saturday: 8 AM - 8 PM</li>
-                        <li>Sunday: Closed</li>
+                            <li>Monday - Friday: 6 AM - 10 PM</li>
+                            <li>Saturday: 8 AM - 8 PM</li>
+                            <li>Sunday: Closed</li>
                         </ul>
                     </div>
                     <div class="col-md-4">

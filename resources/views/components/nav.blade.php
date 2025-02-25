@@ -1,5 +1,5 @@
 @if (Auth::check() && Auth::user()->type === 'customer')
-    <nav class="navbar navbar-customer  navbar-expand-lg navbar-light bg-transparent">
+    <nav class="navbar navbar-customer navbar-expand-lg navbar-light bg-transparent">
         <div class="container-fluid">
             <a class="navbar-brand-customer" href="/welcome">
                 <img src="storage/images/logo.png" alt="Logo" />
@@ -39,7 +39,7 @@
                 </ul>
                 <div class="dropdown me-5">
                     <a href="#" class="nav-item d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="{{ Auth::user()->name }}" width="35" height="35" class="rounded-circle border border-2 border-danger me-2">
+                        <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="{{ Auth::user()->name }}" width="35" height="35" class="rounded-circle border border-danger me-2">
                         <strong>{{ ucfirst(Auth::user()->name) }}</strong>
                     </a>
                     <ul class="dropdown-menu text-small shadow" >
