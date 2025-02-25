@@ -31,16 +31,16 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'price' => 'required',
-            'quantity' => 'required',
-            'type' => 'required',
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:65535',
+            'price' => 'required|decimal:1,2',
+            'quantity' => 'required|integer|min:1',
+            'type' => 'required|in:clothes,equipment,protine',
         ]);
-        $data['status'] = 'available';
+
         Product::create($data);
 
-        return redirect()->route('products.index');
+        return to_route('products.index');
     }
 
     /**
@@ -48,7 +48,7 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
 
         return view('products.show', compact('product'));
     }
@@ -58,7 +58,7 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
 
         return view('products.edit', compact('product'));
     }
@@ -66,21 +66,21 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, string $id)
     {
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:65535',
+            'price' => 'required|decimal:1,2',
+            'quantity' => 'required|integer|min:1',
+            'type' => 'required|in:clothes,equipment,protine',
+        ]);
 
-        $data = [
-            'name' => $request->name,
-            'description' => $request->description,
-            'price' => $request->price,
-            'quantity' => $request->quantity,
-            'type' => $request->type,
-        ];
+        $product = Product::findOrFail($id);
 
-        $product = Product::find($request->id);
         $product->update($data);
 
-        return redirect()->route('products.index');
+        return to_route('products.index');
     }
 
     /**
@@ -88,9 +88,10 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
+
         $product->delete();
 
-        return redirect()->route('products.index');
+        return to_route('products.index');
     }
 }

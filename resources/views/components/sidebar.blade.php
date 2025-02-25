@@ -10,11 +10,12 @@
         @if (Auth::check() && Auth::user()->type === 'store_owner')
             <x-sidebar-link href="/products" :current-page="request()->is('products*')">Products</x-sidebar-link>
         @endif
+        <x-sidebar-link href="/" :current-page="request()->is('/')">Home</x-sidebar-link>
+        <x-sidebar-link href="/services" :current-page="request()->is('services*')">Services</x-sidebar-link>
         @if (Auth::check() && Auth::user()->type === 'gym_owner')
             <x-sidebar-link href="/period" :current-page="request()->is('period')">Period</x-sidebar-link>
         @endif
     </ul>
-
     <hr class="my-2">
     <button class="btn btn-primary" id="theme" aria-label="Toggle theme">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon">

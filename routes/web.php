@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\OrderProductController;
 use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -40,7 +41,7 @@ Route::controller(ProductController::class)->group(function () {
     Route::post('/products', 'store')->name('products.store');
     Route::get('/products/{id}', 'show')->name('products.show');
     Route::get('/products/{id}/edit', 'edit')->name('products.edit');
-    Route::put('/products/update', 'update')->name('products.update');
+    Route::put('/products/{id}', 'update')->name('products.update');
     Route::delete('/products/{id}', 'destroy')->name('products.destroy');
 });
 
@@ -55,15 +56,22 @@ Route::controller(OrderProductController::class)->group(function () {
 });
 
 Route::controller(PeriodController::class)->group(function () {
+    Route::get('/period', 'index')->name('period.index');
     Route::get('/period/create', 'create')->name('period.create');
-    Route::post('/period/store', 'store')->name('period.store');
-    Route::get('/period', 'index')->name('period.period');
-
+    Route::post('/period', 'store')->name('period.store');
+    Route::get('/period/{id}', 'show')->name('period.show');
     Route::get('/period/{id}/edit', 'edit')->name('period.edit');
     Route::put('/period/{id}', 'update')->name('period.update');
-
     Route::delete('/period/{id}', 'destroy')->name('period.destroy');
-
     Route::get('/period/search', 'search')->name('period.search');
-    Route::get('/period/{id}', 'show')->name('period.show');
+});
+
+Route::controller(ServiceController::class)->group(function () {
+    Route::get('/services', 'index')->name('services.index');
+    Route::get('/services/create', 'create')->name('service.create');
+    Route::post('/services', 'store')->name('service.store');
+    Route::get('/services/{id}', 'show')->name('service.show');
+    Route::get('/services/{id}/edit', 'edit')->name('service.edit');
+    Route::put('/services/{id}', 'update')->name('service.update');
+    Route::delete('/services/{id}', 'destroy')->name('service.destroy');
 });
