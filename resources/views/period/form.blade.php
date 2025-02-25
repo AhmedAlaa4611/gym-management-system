@@ -1,22 +1,25 @@
-@props(['name', 'collection', 'type', 'select']) {{-- type => radio or checkbox --}}
+<x-forms action="{{ isset($period) ? route('period.update', $period->id) : route('period.store') }}" enctype="multipart/form-data">
+    <x-forms.input type="text" name="name" value="{{ $period->name ?? null }}">Name</x-forms.input>
 
-<div class="dropdown-center col-md-6">
-    <label class="form-label">{{ $slot }}</label>
-    <button class="dropdown-toggle form-control @error($name) is-invalid @enderror" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-        {{ $slot }}
-    </button>
-    <div class="dropdown-menu px-2" style="width: 95%">
-        <ul class="list-group">
-            @forelse ($collection as $item)
-                <li class="list-group-item list-group-item-action">
-                    <x-forms.check type="{{ $type }}" name="{{ $name }}" value="{{ $item->id }}"
-                    :select="old($name, $select) == $item->id"
-                    >{{ $item->name }}</x-forms.check>
-                </li>
-            @empty
-                <p class="mb-0 text-success">This is empty up until now.</p>
-            @endforelse
-        </ul>
-    </div>
-    <x-forms.error :name="$name" />
-</div>
+    <x-forms.input type="text" name="coach_name" value="{{ $period->coach_name ?? null }}">Coah Name</x-forms.input>
+
+    <x-forms.input name="start_time" type="time" value="{{ isset($period) ? \Carbon\Carbon::parse($period->start_time)->format('H:i') : null }}"
+    >Start Time </x-forms.input>
+
+    <x-forms.input name="end_time"  type="time" value="{{ isset($period) ? \Carbon\Carbon::parse($period->end_time)->format('H:i') : null }}"
+    >End Time</x-forms.input>
+
+    <x-forms.options name="day" :collection="['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']"
+    :value="old('day', $period->day ?? null)">Select Day</x-forms.options>
+
+
+    <x-forms.dropdown name="user_id" :collection="$users" type="radio" select="{{ $period->user->id ?? null }}">User</x-forms.dropdown>
+
+    <x-forms.textarea name="description" value="{{ $period->description ?? null }}">Description</x-forms.textarea>
+
+    @isset($period)
+        @method('PUT')
+    @endisset
+
+    <x-forms.submit>{{ isset($period) ? 'Update' : 'Create' }}</x-forms.submit>
+</x-forms>

@@ -63,6 +63,11 @@
   color: white;
 }
 
+.navbar-customer .dropdown-toggle::after{
+  color: red;
+  font-size: 1.5rem;
+}
+
 #home {
     position: relative;
     background-image: url('/storage/images/banner.png');
