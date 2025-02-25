@@ -9,7 +9,11 @@ class ServiceHistory extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['service_id', 'customer_id', 'reserved_at'];
+    protected $fillable = [
+        'service_id',
+        'customer_id',
+        'reserved_at',
+    ];
 
     public function service()
     {

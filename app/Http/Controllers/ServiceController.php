@@ -3,34 +3,42 @@
 namespace App\Http\Controllers;
 
 use App\Models\Service;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $users = User::all();
+        $services = Service::all();
 
-        return view('service.create', compact('users'));
+        return view('services.index', compact('services'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        return view('service.create');
+        return view('services.create');
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
         $data = $request->validate([
-            'user_id' => 'required|exists:users,id',
+            'user_id' => 'required|integer|min:1|exists:users,id',
             'type' => 'required|in:doc,coach',
-            'day' => 'required|string',
+            'day' => 'required|in:Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday',
         ]);
 
         Service::create($data);
 
-        return redirect()->route('services.index');
+        return to_route('services.index');
     }
 
     /**
@@ -56,18 +64,19 @@ class ServiceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, string $id)
     {
         $data = $request->validate([
-            'user_id' => 'exists:users,id',
-            'type' => 'in:doc,coach',
-            'day' => 'in:Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday',
+            'user_id' => 'required|integer|min:1|exists:users,id',
+            'type' => 'required|in:doc,coach',
+            'day' => 'required|in:Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday',
         ]);
 
-        $service = Service::findOrFail($request->id);
+        $service = Service::findOrFail($id);
+
         $service->update($data);
 
-        return redirect()->route('services.index');
+        return to_route('services.index');
     }
 
     /**
@@ -76,8 +85,9 @@ class ServiceController extends Controller
     public function destroy(string $id)
     {
         $service = Service::findOrFail($id);
+
         $service->delete();
 
-        return redirect()->route('services.index');
+        return to_route('services.index');
     }
 }

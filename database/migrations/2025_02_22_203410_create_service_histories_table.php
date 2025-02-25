@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('service_histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('service_id')->constrained()->onDelete('cascade');
-            $table->foreignId('customer_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('service_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('customer_id')->constrained('users')->cascadeOnDelete();
             $table->timestamp('reserved_at');
             $table->timestamps();
         });
