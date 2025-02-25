@@ -33,7 +33,7 @@ class ServiceController extends Controller
         $data = $request->validate([
             'user_id' => 'required|integer|min:1|exists:users,id',
             'type' => 'required|in:doc,coach',
-            'day' => 'required|in:Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday',
+            'day' => 'required|in:saturday,sunday,monday,tuesday,wednesday,thursday,friday',
         ]);
 
         Service::create($data);
@@ -69,7 +69,7 @@ class ServiceController extends Controller
         $data = $request->validate([
             'user_id' => 'required|integer|min:1|exists:users,id',
             'type' => 'required|in:doc,coach',
-            'day' => 'required|in:Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday',
+            'day' => 'required|in:saturday,sunday,monday,tuesday,wednesday,thursday,friday',
         ]);
 
         $service = Service::findOrFail($id);

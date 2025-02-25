@@ -39,7 +39,7 @@ class PeriodController extends Controller
             'coach_name' => 'required|string|max:255',
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i|after:start_time',
-            'day' => 'required|in:Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday',
+            'day' => 'required|in:saturday,sunday,monday,tuesday,wednesday,thursday,friday',
             'user_id' => 'required|integer|min:1|exists:users,id',
         ]);
 
@@ -81,7 +81,7 @@ class PeriodController extends Controller
             'coach_name' => 'required|string|max:255',
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i|after:start_time',
-            'day' => 'required|in:Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday',
+            'day' => 'required|in:saturday,sunday,monday,tuesday,wednesday,thursday,friday',
             'user_id' => 'required|integer|min:1|exists:users,id',
         ]);
 

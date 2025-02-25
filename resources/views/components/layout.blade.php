@@ -10,7 +10,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     </head>
     <body class="d-flex vh-100">
-        @if (Auth::check() && in_array(Auth::user()->type, ['Admin', 'gym_owner', 'store_owner']))
+        @if (Auth::check() && in_array(Auth::user()->type, ['admin', 'gym_owner', 'store_owner']))
             @include('components.sidebar')
         @endif
 
