@@ -45,6 +45,10 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        return redirect('/')->with('success', 'Registration successful!');
+        if ($user->type === 'customer') {
+            return redirect('/welcome');
+        } else{
+            return redirect('/home');
+        }
     }
 }

@@ -10,7 +10,15 @@ use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
+    return view('login');
+});
+
+Route::get('/home', function () {
     return view('welcome');
+});
+
+Route::get('/welcome', function () {
+    return view('customer.welcome');
 });
 
 Route::controller(RegisterController::class)->group(function () {
