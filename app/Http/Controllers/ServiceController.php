@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\WeekDays;
 use App\Models\Service;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ServiceController extends Controller
 {
@@ -22,7 +25,9 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        return view('services.create');
+        $users = User::all();
+
+        return view('services.create', compact('users'));
     }
 
     /**
@@ -33,7 +38,7 @@ class ServiceController extends Controller
         $data = $request->validate([
             'user_id' => 'required|integer|min:1|exists:users,id',
             'type' => 'required|in:doc,coach',
-            'day' => 'required|in:saturday,sunday,monday,tuesday,wednesday,thursday,friday',
+            'day' => ['required', Rule::in(WeekDays::get())],
         ]);
 
         Service::create($data);
@@ -58,7 +63,9 @@ class ServiceController extends Controller
     {
         $service = Service::findOrFail($id);
 
-        return view('services.edit', compact('service'));
+        $users = User::all();
+
+        return view('services.edit', compact('service', 'users'));
     }
 
     /**
@@ -69,7 +76,7 @@ class ServiceController extends Controller
         $data = $request->validate([
             'user_id' => 'required|integer|min:1|exists:users,id',
             'type' => 'required|in:doc,coach',
-            'day' => 'required|in:saturday,sunday,monday,tuesday,wednesday,thursday,friday',
+            'day' => ['required', Rule::in(WeekDays::get())],
         ]);
 
         $service = Service::findOrFail($id);

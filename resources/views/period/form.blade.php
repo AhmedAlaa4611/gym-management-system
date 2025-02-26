@@ -7,8 +7,7 @@
 
     <x-forms.input name="end_time" type="time" :value="isset($period) ? $period->end_time->format('H:i') : null">End Time</x-forms.input>
 
-    <x-forms.options name="day" :collection="['saturday', 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday']"
-    :value="old('day', $period->day ?? null)">Select Day</x-forms.options>
+    <x-forms.options name="day" :collection="App\Classes\WeekDays::get()" :value="old('day', $period->day ?? null)">Select Day</x-forms.options>
 
     <x-forms.dropdown name="user_id" :collection="$users" type="radio" :select="$period->user->id ?? null">User</x-forms.dropdown>
 

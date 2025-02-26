@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\WeekDays;
 use App\Models\Period;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class PeriodController extends Controller
 {
@@ -39,7 +41,7 @@ class PeriodController extends Controller
             'coach_name' => 'required|string|max:255',
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i|after:start_time',
-            'day' => 'required|in:saturday,sunday,monday,tuesday,wednesday,thursday,friday',
+            'day' => ['required', Rule::in(WeekDays::get())],
             'user_id' => 'required|integer|min:1|exists:users,id',
         ]);
 
@@ -81,7 +83,7 @@ class PeriodController extends Controller
             'coach_name' => 'required|string|max:255',
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i|after:start_time',
-            'day' => 'required|in:saturday,sunday,monday,tuesday,wednesday,thursday,friday',
+            'day' => ['required', Rule::in(WeekDays::get())],
             'user_id' => 'required|integer|min:1|exists:users,id',
         ]);
 

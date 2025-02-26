@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">Service ID: {{ $service->id }}</div>
                 <div class="card-body">
-                    <p class="card-text"><span>User ID: </span>{{ $service->user_id }}</p>
+                    <p class="card-text"><span>User ID: </span>{{ $service->user->name }}</p>
                     <p class="card-text"><span>Type: </span>{{ $service->type }}</p>
                     <p class="card-text"><span>Day: </span>{{ $service->day }}</p>
                 </div>

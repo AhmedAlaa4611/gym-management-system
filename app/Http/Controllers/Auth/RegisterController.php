@@ -47,7 +47,7 @@ class RegisterController extends Controller
 
         if ($user->type === 'customer') {
             return redirect('/welcome');
-        } else{
+        } else {
             return redirect('/home');
         }
     }

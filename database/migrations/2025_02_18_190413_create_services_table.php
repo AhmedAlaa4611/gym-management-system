@@ -1,5 +1,6 @@
 <?php
 
+use App\Classes\WeekDays;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->enum('type', ['doc', 'coach']);
-            $table->enum('day', ['saturday', 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday']);
+            $table->enum('day', WeekDays::get());
             $table->timestamps();
         });
     }

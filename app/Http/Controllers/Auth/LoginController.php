@@ -29,7 +29,7 @@ class LoginController extends Controller
         if (Auth::attempt($data, $request->has('remember'))) {
             if (Auth::user()->type === 'customer') {
                 return redirect('/welcome');
-            } else{
+            } else {
                 return redirect('/home');
             }
         }
