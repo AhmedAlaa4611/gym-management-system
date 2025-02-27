@@ -9,16 +9,22 @@
         <thead>
             <tr>
                 @foreach ($display as $item)
-                    <th scope="col" class="text-capitalize">{{ str_replace('_', ' ', $item) }}</th>
+                    <th scope="col" class="text-capitalize text-center">{{ str_replace('_', ' ', $item) }}</th>
                 @endforeach
-                <th scope="col" class="text-capitalize">action</th>
+                <th scope="col" class="text-capitalize text-center">action</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($collection as $item1)
-                <tr>
+                <tr class="text-capitalize text-center">
                     @foreach ($display as $item2)
-                        <td>{{ $item1->$item2 }}</td>
+                        <td>
+                            @if($item2 === 'user')
+                                {{ $item1->user?->name ?? 'Not Found' }}
+                            @else
+                                {{ $item1->$item2 }}
+                            @endif
+                        </td>
                     @endforeach
                     <td>
                         @php

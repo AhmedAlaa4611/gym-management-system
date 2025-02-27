@@ -13,10 +13,19 @@ class Period extends Model
         'end_time',
         'day',
         'coach_name',
+        'user_id',
     ];
 
-    public function users()
+    protected function casts(): array
     {
-        return $this->hasMany(User::class);
+        return [
+            'start_time' => 'datetime',
+            'end_time' => 'datetime',
+        ];
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

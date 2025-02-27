@@ -9,7 +9,7 @@
         <ul class="list-group">
             @forelse ($collection as $item)
                 <li class="list-group-item list-group-item-action">
-                    <x-forms.check type="{{ $type }}" name="{{ $name }}" value="{{ $item->id }}" :select="$select == $item->id">{{ $item->title }}</x-forms.check>
+                    <x-forms.check type="{{ $type }}" name="{{ $name }}" value="{{ $item->id }}" :select="old($name, $select) == $item->id">{{ $item->name }}</x-forms.check>
                 </li>
             @empty
                 <p class="mb-0 text-success">This is empty up until now.</p>
