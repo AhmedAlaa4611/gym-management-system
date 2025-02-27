@@ -5,6 +5,9 @@
     <hr class="my-2">
     <ul class="nav nav-pills flex-column mb-auto">
         <x-sidebar-link href="/" :current-page="request()->is('/')">Home</x-sidebar-link>
+        <x-sidebar-link href="/packages" :current-page="request()->is('/packages')"> 📦packages</x-sidebar-link>
+        <x-sidebar-link href="/package_users" :current-page="request()->is('/package_users')"> 📦subscriptions</x-sidebar-link>
+    </ul>
     </ul>
     <hr class="my-2">
     <button class="btn btn-primary" id="theme" aria-label="Toggle theme">
