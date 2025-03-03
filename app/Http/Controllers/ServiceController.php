@@ -7,6 +7,7 @@ use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class ServiceController extends Controller
 {
@@ -15,7 +16,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::all();
+        $services = Service::where('user_id', Auth::id())->get();
 
         return view('services.index', compact('services'));
     }
@@ -25,9 +26,8 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        $users = User::all();
 
-        return view('services.create', compact('users'));
+        return view('services.create');
     }
 
     /**
@@ -36,11 +36,10 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'user_id' => 'required|integer|min:1|exists:users,id',
             'type' => 'required|in:doc,coach',
             'day' => ['required', Rule::in(WeekDays::get())],
         ]);
-
+        $data['user_id']=Auth::user()->id;
         Service::create($data);
 
         return to_route('services.index');
@@ -74,7 +73,6 @@ class ServiceController extends Controller
     public function update(Request $request, string $id)
     {
         $data = $request->validate([
-            'user_id' => 'required|integer|min:1|exists:users,id',
             'type' => 'required|in:doc,coach',
             'day' => ['required', Rule::in(WeekDays::get())],
         ]);
