@@ -50,16 +50,16 @@ Route::middleware(['auth', EnsureUserIsAdmin::class])->group(function () {
         Route::delete('/packages/{package}', 'destroy')->name('packages.destroy');
     });
 
-});
+    Route::controller(PackageUserController::class)->group(function () {
+        Route::get('/package_users', 'index')->name('package_users.index');
+        Route::get('/package_users/create', 'create')->name('package_users.create');
+        Route::post('/package_users', 'store')->name('package_users.store');
+        Route::get('/package_users/{packageUser}', 'show')->name('package_users.show');
+        Route::get('/package_users/{packageUser}/edit', 'edit')->name('package_users.edit');
+        Route::put('/package_users/{packageUser}', 'update')->name('package_users.update');
+        Route::delete('/package_users/{packageUser}', 'destroy')->name('package_users.destroy');
+    });
 
-Route::controller(PackageUserController::class)->group(function () {
-    Route::get('/package_users', 'index')->name('package_users.index');
-    Route::get('/package_users/create', 'create')->name('package_users.create');
-    Route::post('/package_users', 'store')->name('package_users.store');
-    Route::get('/package_users/{packageUser}', 'show')->name('package_users.show');
-    Route::get('/package_users/{packageUser}/edit', 'edit')->name('package_users.edit');
-    Route::put('/package_users/{packageUser}', 'update')->name('package_users.update');
-    Route::delete('/package_users/{packageUser}', 'destroy')->name('package_users.destroy');
 });
 
 Route::controller(ProductController::class)->group(function () {

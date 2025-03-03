@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Package;
 use App\Models\PackageUser;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class PackageUserController extends Controller
 {
@@ -41,7 +41,6 @@ class PackageUserController extends Controller
             'user_id' => 'required|exists:users,id',
             'package_id' => 'required|exists:packages,id',
             'from_at' => 'required|date',
-
         ]);
 
         $package = Package::findOrFail($request->package_id);
