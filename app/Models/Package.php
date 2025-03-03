@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Package extends Model
 {
-    use HasFactory;
-
-    protected $fillable = ['name', 'duration', 'price'];
+    protected $fillable = [
+        'name',
+        'duration',
+        'price',
+    ];
 
     public function users()
     {

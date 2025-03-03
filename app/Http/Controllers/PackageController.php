@@ -7,46 +7,65 @@ use Illuminate\Http\Request;
 
 class PackageController extends Controller
 {
-   
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $packages = Package::all();
 
+        return view('packages.index', compact('packages'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
         return view('packages.create');
     }
 
-    
-
-
-
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
-{
-    if (auth()->user()->type !== 'admin') {
-        return redirect()->back()->with('error', 'Unauthorized action!');
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'duration' => 'required|integer',
+            'price' => 'required|decimal:1,2',
+        ]);
+
+        Package::create($validated);
+
+        return redirect()->route('packages.index')->with('success', 'Package created successfully.');
     }
 
-    $validated = $request->validate([
-        'name' => 'required|string|max:255',
-        'price' => 'required|numeric',
-        'duration' => 'required|integer',
-    ]);
+    /**
+     * Display the specified resource.
+     */
+    public function show(Package $package)
+    {
+        return view('packages.show', compact('package'));
+    }
 
-    Package::create($validated);
-
-    return redirect()->route('packages.index')->with('success', 'Package created successfully.');
-}
-
-
+    /**
+     * Show the form for editing the specified resource.
+     */
     public function edit(Package $package)
     {
         return view('packages.edit', compact('package'));
     }
 
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(Request $request, Package $package)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'duration' => 'required|numeric',
-            'price' => 'required|numeric',
+            'duration' => 'required|integer',
+            'price' => 'required|decimal:1,2',
         ]);
 
         $package->update($request->all());
@@ -54,25 +73,13 @@ class PackageController extends Controller
         return redirect()->route('packages.index')->with('success', 'Package updated successfully');
     }
 
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(Package $package)
     {
         $package->delete();
+
         return redirect()->route('packages.index')->with('success', 'Package deleted successfully');
     }
-    public function index()
-        {
-            $packages = Package::all(); // جلب جميع الـ Packages
-            return view('packages.index', [
-                'packages' => $packages,
-                'tableName' => 'packages' // تمرير اسم الجدول
-            ]);
-        }
-
-
-        public function show(Package $package)
-        {
-            return view('packages.show', compact('package'));
-        }
-        
-
 }

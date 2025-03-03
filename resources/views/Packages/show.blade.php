@@ -1,12 +1,7 @@
-<x-layout heading="Package Details">
-    <div class="container">
-        
+<x-layout>
+    <x-slot:heading>Package Details</x-slot:heading>
 
-        {{-- استخدام x-table لعرض بيانات الباكدج الواحدة --}}
-        <x-table :collection="[$package]" :display="['id', 'name', 'price', 'duration']" tableName="packages" />
+    <x-table :collection="[$package]" :display="['id', 'name', 'price', 'duration']" table-name="packages" />
 
-        {{-- زر الرجوع --}}
-        <a href="{{ route('packages.index') }}" class="btn btn-secondary mt-3">Back</a>
-    </div>
+    <a href="{{ route('packages.index') }}" class="btn btn-secondary mt-3">Back</a>
 </x-layout>
-

@@ -1,13 +1,5 @@
-<x-layout heading="📦Packages Management">
-    <div class="container">
-       
+<x-layout>
+    <x-slot:heading>📦Packages Management</x-slot:heading>
 
-        {{-- زر إضافة باكدج جديدة --}}
-       
-      {{-- <x-buttons.primary :url="'/create'">Add New One</x-buttons.primary>
-           x-buttons.primary :url="'/{package}'">Show</x-buttons.primary> 
-
-        {{-- جدول عرض الـ Packages --}}
-        <x-table :collection="$packages" :display="['id', 'name', 'price', 'duration']" tableName="packages" />
-    </div>
+    <x-table :collection="$packages" :display="['id', 'name', 'price', 'duration']" table-name="packages" />
 </x-layout>

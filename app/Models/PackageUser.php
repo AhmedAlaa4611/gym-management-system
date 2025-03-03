@@ -1,16 +1,27 @@
 <?php
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class PackageUser extends Pivot
 {
-    use HasFactory;
+    protected $fillable = [
+        'user_id',
+        'package_id',
+        'from_at',
+        'to_at',
+        'expired_at',
+    ];
 
-    protected $table = 'package_user';
-
-    protected $fillable = ['user_id', 'package_id','from_at','to_at','expired_at'];
+    protected function casts(): array
+    {
+        return [
+            'from_at' => 'datetime',
+            'to_at' => 'datetime',
+            'expired_at' => 'datetime',
+        ];
+    }
 
     public function user()
     {

@@ -1,11 +1,9 @@
 <?php
 
-
-
 namespace App\Http\Controllers;
 
-use App\Models\PackageUser;
 use App\Models\Package;
+use App\Models\PackageUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -13,26 +11,29 @@ use Carbon\Carbon;
 class PackageUserController extends Controller
 {
     /**
-     * عرض جميع الاشتراكات.
+     * Display a listing of the resource.
      */
     public function index()
     {
         $package_users = PackageUser::with('package', 'user')->get();
+
         return view('package_users.index', compact('package_users'));
     }
 
     /**
-     * عرض نموذج إنشاء اشتراك جديد.
+     * Show the form for creating a new resource.
      */
     public function create()
     {
         $users = User::all();
+
         $packages = Package::all();
+
         return view('package_users.create', compact('users', 'packages'));
     }
 
     /**
-     * تخزين اشتراك جديد في قاعدة البيانات.
+     * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
@@ -47,21 +48,19 @@ class PackageUserController extends Controller
         $fromAt = Carbon::parse($request->from_at);
         $toAt = $fromAt->copy()->addDays($package->duration);
 
-
-
         PackageUser::create([
             'user_id' => $request->user_id,
             'package_id' => $request->package_id,
             'from_at' => $fromAt,
-            'to_at' => $toAt, 
-            'expired_at' => $toAt, 
+            'to_at' => $toAt,
+            'expired_at' => $toAt,
         ]);
 
         return redirect()->route('package_users.index')->with('success', 'Subscription created successfully.');
     }
 
     /**
-     * عرض تفاصيل اشتراك معين.
+     * Display the specified resource.
      */
     public function show(PackageUser $packageUser)
     {
@@ -69,17 +68,19 @@ class PackageUserController extends Controller
     }
 
     /**
-     * عرض نموذج تعديل الاشتراك.
+     * Show the form for editing the specified resource.
      */
     public function edit(PackageUser $packageUser)
     {
         $users = User::all();
+
         $packages = Package::all();
+
         return view('package_users.edit', compact('packageUser', 'users', 'packages'));
     }
 
     /**
-     * تحديث بيانات الاشتراك في قاعدة البيانات.
+     * Update the specified resource in storage.
      */
     public function update(Request $request, PackageUser $packageUser)
     {
@@ -93,26 +94,24 @@ class PackageUserController extends Controller
         $fromAt = Carbon::parse($request->from_at);
         $toAt = $fromAt->copy()->addDays($package->duration);
 
-
-
-
         $packageUser->update([
             'user_id' => $request->user_id,
             'package_id' => $request->package_id,
             'from_at' => $fromAt,
             'to_at' => $toAt,
-            'expired_at' => $toAt, 
+            'expired_at' => $toAt,
         ]);
 
         return redirect()->route('package_users.index')->with('success', 'Subscription updated successfully.');
     }
 
     /**
-     * حذف الاشتراك من قاعدة البيانات.
+     * Remove the specified resource from storage.
      */
     public function destroy(PackageUser $packageUser)
     {
         $packageUser->delete();
+
         return redirect()->route('package_users.index')->with('success', 'Subscription deleted successfully.');
     }
 }

@@ -1,11 +1,5 @@
-<x-layout heading="📅subscriptions">
-    <div class="container">
-        
-      
+<x-layout>
+    <x-slot:heading>📅Subscriptions</x-slot:heading>
 
-        {{-- جدول عرض الـ Packages --}}
-        <x-table :collection="$package_users" :display="['id', 'user_id', 'package_id', 'from_at', 'to_at','expired_at']" tableName="package_users" />
-
-    
-    </div>
+    <x-table :collection="$package_users" :display="['id', 'user_id', 'package_id', 'from_at', 'to_at', 'expired_at']" table-name="package_users" />
 </x-layout>

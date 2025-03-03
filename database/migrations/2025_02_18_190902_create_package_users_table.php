@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('package_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('package_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('package_id')->constrained()->cascadeOnDelete();
             $table->dateTime('from_at');
             $table->dateTime('to_at')->nullable();
             $table->dateTime('expired_at')->nullable();
-           
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('package_users');
+        Schema::dropIfExists('package_user');
     }
 };
