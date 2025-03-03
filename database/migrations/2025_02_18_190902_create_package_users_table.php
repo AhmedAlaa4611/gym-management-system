@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('package_users', function (Blueprint $table) {
+        Schema::create('package_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('package_id')->constrained();
-            $table->date('from');
-            $table->date('to');
-            $table->boolean('is_active');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('package_id')->constrained()->onDelete('cascade');
+            $table->dateTime('from_at');
+            $table->dateTime('to_at')->nullable();
+            $table->dateTime('expired_at')->nullable();
+           
             $table->timestamps();
         });
     }

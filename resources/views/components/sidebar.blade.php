@@ -11,6 +11,9 @@
             <x-sidebar-link href="/products" :current-page="request()->is('products*')">Products</x-sidebar-link>
         @endif
         <x-sidebar-link href="/" :current-page="request()->is('/')">Home</x-sidebar-link>
+        <x-sidebar-link href="/packages" :current-page="request()->is('/packages')"> 📦packages</x-sidebar-link>
+        <x-sidebar-link href="/package_users" :current-page="request()->is('/package_users')"> 📅subscriptions</x-sidebar-link>
+    </ul>
         <x-sidebar-link href="/services" :current-page="request()->is('services*')">Services</x-sidebar-link>
         @if (Auth::check() && Auth::user()->type === 'gym_owner')
             <x-sidebar-link href="/period" :current-page="request()->is('period')">Period</x-sidebar-link>
