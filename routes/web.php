@@ -38,21 +38,6 @@ Route::controller(AuthController::class)->group(function () {
     Route::delete('/logout', 'destroy')->name('logout');
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Route::prefix('packages')->name('packages.')->group(function () {
     Route::get('/', [PackageController::class, 'index'])->name('index'); // عرض جميع الباكدجات
     Route::get('/create', [PackageController::class, 'create'])->name('create'); // عرض نموذج إنشاء باكدج جديدة
@@ -75,24 +60,8 @@ Route::prefix('/package_users')->name('package_users.')->group(function () {
     Route::delete('/{packageUser}', [PackageUserController::class, 'destroy'])->name('destroy'); // حذف باكدج
 });
 
+Route::middleware([AdminForPackages::class])->group(function () { Route::resource('packages', PackageController::class);});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Route::middleware(['auth', 'admin.packages'])->group(function () {
-    Route::resource('packages', PackageController::class);
-});
 Route::controller(ProductController::class)->group(function () {
     Route::get('/products', 'index')->name('products.index');
     Route::get('/products/create', 'create')->name('products.create');

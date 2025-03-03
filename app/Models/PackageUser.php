@@ -10,7 +10,7 @@ class PackageUser extends Pivot
 
     protected $table = 'package_user';
 
-    protected $fillable = ['user_id', 'package_id','from_at'];
+    protected $fillable = ['user_id', 'package_id','from_at','to_at','expired_at'];
 
     public function user()
     {

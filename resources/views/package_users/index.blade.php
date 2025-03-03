@@ -1,4 +1,4 @@
-<x-layout heading="package_users">
+<x-layout heading="📅subscriptions">
     <div class="container">
         
       

@@ -2,8 +2,8 @@
     <div class="container">
         
         {{-- استخدام x-table لعرض بيانات الاشتراك الواحد --}}
-        <x-table :collection="[$package_user]" 
-                 :display="['id', 'user_id', 'package_id', 'from_at', 'to_at','expired_at']" 
+        <x-table :collection="[$packageUser]" 
+                 :display="['id', 'user_id', 'package_id', 'from_at', 'to_at', 'expired_at']" 
                  tableName="package_users" />
 
         {{-- زر الرجوع --}}

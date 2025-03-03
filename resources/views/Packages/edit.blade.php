@@ -16,17 +16,20 @@
             @csrf
             @method('PUT')
 
-            <x-input name="name" value="{{ $package->name }}" class="mb-3">
-                Package Name
-            </x-input>
+            <div class="mb-3">
+                        <label for="name" class="form-label">Package Name</label>
+                        <input type="text" name="name" id="name" value="{{ old('name', $package->name) }}" class="form-control">
+                    </div>
 
-            <x-input name="duration" value="{{ $package->duration }}" type="integer" class="mb-3">
-                Duration (in days)
-            </x-input>
+                    <div class="mb-3">
+                        <label for="duration" class="form-label">Duration (in days)</label>
+                        <input type="number" name="duration" id="duration" value="{{ old('duration', $package->duration) }}" class="form-control">
+                    </div>
 
-            <x-input name="price" value="{{ $package->price }}" type="text" class="mb-3">
-                Price
-            </x-input>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="text" name="price" id="price" value="{{ old('price', $package->price) }}" class="form-control">
+                    </div>
 
             <button type="submit" class="btn btn-primary">Update Package</button>
             <a href="{{ route('packages.index') }}" class="btn btn-secondary">Cancel</a>

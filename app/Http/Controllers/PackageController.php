@@ -45,7 +45,7 @@ class PackageController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'duration' => 'required|integer',
+            'duration' => 'required|numeric',
             'price' => 'required|numeric',
         ]);
 

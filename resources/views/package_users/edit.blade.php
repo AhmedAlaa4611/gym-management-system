@@ -16,30 +16,22 @@
             @csrf
             @method('PUT')
 
-            <x-input name="user_id" value="{{ $packageUser->user_id }}" class="mb-3">
-                User ID
-            </x-input>
+            <div class="mb-3">
+                <label for="user_id" class="form-label">User ID</label>
+                <input type="text" name="user_id" id="user_id" value="{{ old('user_id', $packageUser->user_id) }}" class="form-control">
+            </div>
 
-            <x-input name="package_id" value="{{ $packageUser->package_id }}" class="mb-3">
-                Package ID
-            </x-input>
+            <div class="mb-3">
+                <label for="package_id" class="form-label">Package ID</label>
+                <input type="text" name="package_id" id="package_id" value="{{ old('package_id', $packageUser->package_id) }}" class="form-control">
+            </div>
 
-                     <x-input name="from_at" value="{{ $packageUser->from_at }}" type="date" class="mb-3">
-                        Start Date (from_at)
-                    </x-input>
+            <div class="mb-3">
+                <label for="from_at" class="form-label">Start Date (from_at)</label>
+                <input type="date" name="from_at" id="from_at" value="{{ old('from_at', $packageUser->from_at) }}" class="form-control">
+            </div>
 
-                    <x-input name="to_at" value="{{ $packageUser->to_at }}" type="date" class="mb-3" readonly>
-                        End Date (to_at) - Auto Calculated
-                    </x-input>
-
-
-            <x-input name="expired_at" value="{{ $packageUser->expired_at }}" type="date" class="mb-3">
-                Expired Date (expired_at)
-            </x-input>
-
-            <x-input name="reserved_at" value="{{ $packageUser->reserved_at }}" type="date" class="mb-3">
-                Reserved Date (reserved_at)
-            </x-input>
+            
 
             <button type="submit" class="btn btn-primary">Update Package User</button>
             <a href="{{ route('package_users.index') }}" class="btn btn-secondary">Cancel</a>
