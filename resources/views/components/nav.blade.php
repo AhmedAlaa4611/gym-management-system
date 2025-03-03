@@ -2,7 +2,7 @@
     <nav class="navbar navbar-customer navbar-expand-lg navbar-light bg-transparent">
         <div class="container-fluid">
             <a class="navbar-brand-customer" href="/welcome">
-                <img src="storage/images/logo.png" alt="Logo" />
+                <img src="images/logo.png" alt="Logo" />
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

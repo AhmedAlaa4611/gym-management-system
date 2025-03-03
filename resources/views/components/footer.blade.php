@@ -35,7 +35,7 @@
                 </div>
                 <div class="row mt-4">
                     <div class="col-12 text-center">
-                        <p class="text-danger mb-0">&copy; 2025 GymFit - All Rights Reserved</p>
+                        <p class="text-danger mb-0">&copy; 2025 Mora Montasser - All Rights Reserved</p>
                     </div>
                 </div>
             </div>

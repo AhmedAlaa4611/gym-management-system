@@ -16,7 +16,7 @@
             <x-forms.error name="gender" />
         </div>
 
-        <x-forms.options name="type" :collection="['store_owner', 'gym_owner', 'admin', 'customer']">
+        <x-forms.options name="type" :collection="['customer']">
             Select a Type
         </x-forms.options>
 

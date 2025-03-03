@@ -7,6 +7,8 @@ use App\Models\Period;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
+
 
 class PeriodController extends Controller
 {
@@ -15,8 +17,7 @@ class PeriodController extends Controller
      */
     public function index()
     {
-        $periods = Period::with('user')->get();
-
+        $periods = Period::with('user')->where('user_id', Auth::id())->get();
         return view('period.index', compact('periods'));
     }
 
@@ -25,9 +26,7 @@ class PeriodController extends Controller
      */
     public function create()
     {
-        $users = User::all();
-
-        return view('period.create', compact('users'));
+        return view('period.create');
     }
 
     /**
@@ -42,9 +41,9 @@ class PeriodController extends Controller
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i|after:start_time',
             'day' => ['required', Rule::in(WeekDays::get())],
-            'user_id' => 'required|integer|min:1|exists:users,id',
         ]);
-
+        
+        $data['user_id']=Auth::user()->id;
         Period::create($data);
 
         return to_route('period.index')->with('success', 'Class created successfully!');
@@ -84,7 +83,6 @@ class PeriodController extends Controller
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i|after:start_time',
             'day' => ['required', Rule::in(WeekDays::get())],
-            'user_id' => 'required|integer|min:1|exists:users,id',
         ]);
 
         $period = Period::findOrFail($id);

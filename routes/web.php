@@ -24,6 +24,18 @@ Route::get('/welcome', function () {
     return view('customer.welcome');
 });
 
+Route::get('/gym', function () {
+    return view('customer.gym');
+});
+
+Route::get('/product', function () {
+    return view('customer.product');
+});
+
+Route::get('/forms', function () {
+    return view('admin.register');
+});
+
 Route::controller(RegisterController::class)->group(function () {
     Route::get('/register', 'create')->name('register.create');
     Route::post('/register', 'store')->name('register.store');

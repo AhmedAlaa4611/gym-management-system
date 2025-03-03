@@ -9,8 +9,6 @@
 
     <x-forms.options name="day" :collection="App\Classes\WeekDays::get()" :value="old('day', $period->day ?? null)">Select Day</x-forms.options>
 
-    <x-forms.dropdown name="user_id" :collection="$users" type="radio" :select="$period->user->id ?? null">User</x-forms.dropdown>
-
     <x-forms.textarea name="description" :value="$period->description ?? null">Description</x-forms.textarea>
 
     @isset($period)

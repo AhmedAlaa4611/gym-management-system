@@ -17,8 +17,18 @@
             <x-sidebar-link href="/products" :current-page="request()->is('products*')">Products</x-sidebar-link>
             <x-sidebar-link href="/services" :current-page="request()->is('services*')">Services</x-sidebar-link>
         @endif
+
+
+        @if (Auth::check() && Auth::user()->type === 'gym_owner')
+            <x-sidebar-link href="/services" :current-page="request()->is('services*')">Services</x-sidebar-link>
+            <x-sidebar-link href="/period" :current-page="request()->is('period')">Period</x-sidebar-link>
+
         @if (Auth::check() && Auth::user()->type === 'customer')
             <x-sidebar-link href="/welcome" :current-page="request()->is('/welcome')">Home</x-sidebar-link>
+
+        @endif
+        @if (Auth::check() && Auth::user()->type === 'admin')
+            <x-sidebar-link href="/forms" :current-page="request()->is('services*')">Forms</x-sidebar-link>
         @endif
     </ul>
     <hr class="my-2">
