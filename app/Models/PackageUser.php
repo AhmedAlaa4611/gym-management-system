@@ -2,23 +2,24 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class PackageUser extends Model
+class PackageUser extends Pivot
 {
     protected $fillable = [
         'user_id',
         'package_id',
-        'from',
-        'to',
-        'is_active',
+        'from_at',
+        'to_at',
+        'expired_at',
     ];
 
     protected function casts(): array
     {
         return [
-            'from' => 'datetime',
-            'to' => 'datetime',
+            'from_at' => 'datetime',
+            'to_at' => 'datetime',
+            'expired_at' => 'datetime',
         ];
     }
 
