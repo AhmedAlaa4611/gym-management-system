@@ -21,7 +21,7 @@ class PeriodController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => $periods
+            'data' => $periods,
         ], Response::HTTP_OK);
     }
 
@@ -43,7 +43,7 @@ class PeriodController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
-                'errors' => $validator->errors()
+                'errors' => $validator->errors(),
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
@@ -52,7 +52,7 @@ class PeriodController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Class created successfully!',
-            'data' => $period
+            'data' => $period,
         ], Response::HTTP_CREATED);
     }
 
@@ -63,16 +63,16 @@ class PeriodController extends Controller
     {
         $period = Period::with('user')->find($id);
 
-        if (!$period) {
+        if (! $period) {
             return response()->json([
                 'success' => false,
-                'message' => 'Class not found.'
+                'message' => 'Class not found.',
             ], Response::HTTP_NOT_FOUND);
         }
 
         return response()->json([
             'success' => true,
-            'data' => $period
+            'data' => $period,
         ], Response::HTTP_OK);
     }
 
@@ -83,10 +83,10 @@ class PeriodController extends Controller
     {
         $period = Period::find($id);
 
-        if (!$period) {
+        if (! $period) {
             return response()->json([
                 'success' => false,
-                'message' => 'Class not found.'
+                'message' => 'Class not found.',
             ], Response::HTTP_NOT_FOUND);
         }
 
@@ -114,10 +114,9 @@ class PeriodController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Class updated successfully!',
-            'data' => $period->refresh()
+            'data' => $period->refresh(),
         ], Response::HTTP_OK);
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -126,10 +125,10 @@ class PeriodController extends Controller
     {
         $period = Period::find($id);
 
-        if (!$period) {
+        if (! $period) {
             return response()->json([
                 'success' => false,
-                'message' => 'Class not found.'
+                'message' => 'Class not found.',
             ], Response::HTTP_NOT_FOUND);
         }
 
@@ -137,7 +136,7 @@ class PeriodController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Class deleted successfully!'
+            'message' => 'Class deleted successfully!',
         ], Response::HTTP_NO_CONTENT);
     }
 
@@ -155,13 +154,13 @@ class PeriodController extends Controller
         if ($periods->isEmpty()) {
             return response()->json([
                 'success' => false,
-                'message' => 'No results found.'
+                'message' => 'No results found.',
             ], Response::HTTP_NOT_FOUND);
         }
 
         return response()->json([
             'success' => true,
-            'data' => $periods
+            'data' => $periods,
         ], Response::HTTP_OK);
     }
 }
