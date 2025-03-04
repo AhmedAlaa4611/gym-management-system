@@ -6,8 +6,8 @@ use App\Classes\WeekDays;
 use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class ServiceController extends Controller
 {
@@ -39,7 +39,7 @@ class ServiceController extends Controller
             'type' => 'required|in:doc,coach',
             'day' => ['required', Rule::in(WeekDays::get())],
         ]);
-        $data['user_id']=Auth::user()->id;
+        $data['user_id'] = Auth::user()->id;
         Service::create($data);
 
         return to_route('services.index');

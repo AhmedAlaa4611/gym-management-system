@@ -6,9 +6,8 @@ use App\Classes\WeekDays;
 use App\Models\Period;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Validation\Rule;
 
 class PeriodController extends Controller
 {
@@ -18,6 +17,7 @@ class PeriodController extends Controller
     public function index()
     {
         $periods = Period::with('user')->where('user_id', Auth::id())->get();
+
         return view('period.index', compact('periods'));
     }
 
@@ -42,8 +42,8 @@ class PeriodController extends Controller
             'end_time' => 'required|date_format:H:i|after:start_time',
             'day' => ['required', Rule::in(WeekDays::get())],
         ]);
-        
-        $data['user_id']=Auth::user()->id;
+
+        $data['user_id'] = Auth::user()->id;
         Period::create($data);
 
         return to_route('period.index')->with('success', 'Class created successfully!');

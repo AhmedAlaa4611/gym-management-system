@@ -33,11 +33,15 @@ class ProductController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:65535',
-            'price' => 'required|decimal:1,2',
+            'price' => 'required',
             'quantity' => 'required|integer|min:1',
             'type' => 'required|in:clothes,equipment,protine',
+            'image' => ['required', 'max:2048'],
         ]);
 
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('images', 'public');
+        }
         Product::create($data);
 
         return to_route('products.index');
@@ -74,8 +78,11 @@ class ProductController extends Controller
             'price' => 'required|decimal:1,2',
             'quantity' => 'required|integer|min:1',
             'type' => 'required|in:clothes,equipment,protine',
+            'image' => ['required', 'image', 'max:2048'],
         ]);
-
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('images', 'public');
+        }
         $product = Product::findOrFail($id);
 
         $product->update($data);
