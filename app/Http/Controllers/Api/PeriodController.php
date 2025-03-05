@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use Carbon\Carbon;
 class PeriodController extends Controller
 {
     /**
@@ -25,34 +24,22 @@ class PeriodController extends Controller
             $query->where('user_id', $userId);
         }
 
-        $periods = Period::with('user')->get()->map(function ($period) {
-            $period->start_time = Carbon::parse($period->start_time)->format('H:i');
-            $period->end_time = Carbon::parse($period->end_time)->format('H:i');
-            return $period;
-        });
+        $data = $query->get()->makeHidden(['user', 'created_at', 'updated_at']);
+
+        if ($data->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No data found!',
+            ], Response::HTTP_NOT_FOUND);
+        }
 
         return response()->json([
             'success' => true,
-            'data' => $periods,
+            'message' => 'Class showed successfully!',
+            'data' => $data,
         ], Response::HTTP_OK);
     }
 
-    public function getByUser($user_id)
-    {
-        $periods = Period::with('user')
-            ->where('user_id', $user_id)
-            ->get()
-            ->map(function ($period) {
-                $period->start_time = Carbon::parse($period->start_time)->format('H:i');
-                $period->end_time = Carbon::parse($period->end_time)->format('H:i');
-                return $period;
-            });
-
-        return response()->json([
-            'success' => true,
-            'data' => $periods,
-        ], Response::HTTP_OK);
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -99,11 +86,14 @@ class PeriodController extends Controller
             ], Response::HTTP_NOT_FOUND);
         }
 
+        $period->makeHidden(['user', 'created_at', 'updated_at']);
+
         return response()->json([
             'success' => true,
             'data' => $period,
         ], Response::HTTP_OK);
     }
+
 
     /**
      * Update the specified resource in storage.

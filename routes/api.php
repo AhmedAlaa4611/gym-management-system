@@ -13,8 +13,6 @@ Route::get('/user', function (Request $request) {
 
 // Resourceful API routes
 Route::apiResource('periods', PeriodController::class);
-Route::get('/periods/user/{user_id}', [PeriodController::class, 'getByUser']);
-
 
 // Products
 Route::get('/products', [ProductApiController::class, 'index']);
