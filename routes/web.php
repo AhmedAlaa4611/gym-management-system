@@ -11,6 +11,7 @@ use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Middleware\EnsureUserIsAdmin;
+use App\Http\Middleware\EnsureGymOwner;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -95,25 +96,28 @@ Route::controller(OrderProductController::class)->group(function () {
     Route::delete('/orderproducts/{id}', 'destroy')->name('orderproducts.destroy');
 });
 
-Route::controller(PeriodController::class)->group(function () {
-    Route::get('/period', 'index')->name('period.index');
-    Route::get('/period/create', 'create')->name('period.create');
-    Route::post('/period', 'store')->name('period.store');
-    Route::get('/period/{id}', 'show')->name('period.show');
-    Route::get('/period/{id}/edit', 'edit')->name('period.edit');
-    Route::put('/period/{id}', 'update')->name('period.update');
-    Route::delete('/period/{id}', 'destroy')->name('period.destroy');
-    Route::get('/period/search', 'search')->name('period.search');
-});
+Route::middleware(['auth', EnsureGymOwner::class])->group(function () {
+    Route::controller(PeriodController::class)->group(function () {
+        Route::get('/period', 'index')->name('period.index');
+        Route::get('/period/create', 'create')->name('period.create');
+        Route::post('/period', 'store')->name('period.store');
+        Route::get('/period/{id}', 'show')->name('period.show');
+        Route::get('/period/{id}/edit', 'edit')->name('period.edit');
+        Route::put('/period/{id}', 'update')->name('period.update');
+        Route::delete('/period/{id}', 'destroy')->name('period.destroy');
+        Route::get('/period/search', 'search')->name('period.search');
+    });
+    
+    Route::controller(ServiceController::class)->group(function () {
+        Route::get('/services', 'index')->name('services.index');
+        Route::get('/services/create', 'create')->name('service.create');
+        Route::post('/services', 'store')->name('service.store');
+        Route::get('/services/{id}', 'show')->name('service.show');
+        Route::get('/services/{id}/edit', 'edit')->name('service.edit');
+        Route::put('/services/{id}', 'update')->name('service.update');
+        Route::delete('/services/{id}', 'destroy')->name('service.destroy');
+    });
 
-Route::controller(ServiceController::class)->group(function () {
-    Route::get('/services', 'index')->name('services.index');
-    Route::get('/services/create', 'create')->name('service.create');
-    Route::post('/services', 'store')->name('service.store');
-    Route::get('/services/{id}', 'show')->name('service.show');
-    Route::get('/services/{id}/edit', 'edit')->name('service.edit');
-    Route::put('/services/{id}', 'update')->name('service.update');
-    Route::delete('/services/{id}', 'destroy')->name('service.destroy');
 });
 
 Route::get('/addToCart/{id}', [CartController::class, 'addToCart']);
