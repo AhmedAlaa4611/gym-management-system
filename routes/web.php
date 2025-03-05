@@ -12,6 +12,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Middleware\EnsureUserIsAdmin;
 use App\Http\Middleware\EnsureUserIsGymOwner;
+use App\Http\Middleware\EnsureUserIsStoreOwner;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -76,14 +77,18 @@ Route::middleware(['auth', EnsureUserIsAdmin::class])->group(function () {
 
 });
 
-Route::controller(ProductController::class)->group(function () {
-    Route::get('/products', 'index')->name('products.index');
-    Route::get('/products/create', 'create')->name('products.create');
-    Route::post('/products', 'store')->name('products.store');
-    Route::get('/products/{id}', 'show')->name('products.show');
-    Route::get('/products/{id}/edit', 'edit')->name('products.edit');
-    Route::put('/products/{id}', 'update')->name('products.update');
-    Route::delete('/products/{id}', 'destroy')->name('products.destroy');
+Route::middleware(['auth', EnsureUserIsStoreOwner::class])->group(function () {
+
+    Route::controller(ProductController::class)->group(function () {
+        Route::get('/products', 'index')->name('products.index');
+        Route::get('/products/create', 'create')->name('products.create');
+        Route::post('/products', 'store')->name('products.store');
+        Route::get('/products/{id}', 'show')->name('products.show');
+        Route::get('/products/{id}/edit', 'edit')->name('products.edit');
+        Route::put('/products/{id}', 'update')->name('products.update');
+        Route::delete('/products/{id}', 'destroy')->name('products.destroy');
+    });
+
 });
 
 Route::controller(OrderProductController::class)->group(function () {
