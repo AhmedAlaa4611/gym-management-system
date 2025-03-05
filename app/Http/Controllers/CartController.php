@@ -19,54 +19,13 @@ class CartController extends Controller
 
             return view('cart.show', compact('exsistcart'));
         } else {
+            Cart::create([
+                'user_id'=>Auth::id(),
+            ]);
             return view('cart.show', ['exsistcart' => collect([])]);
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create() {}
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Cart $cart)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Cart $cart)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Cart $cart)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Cart $cart)
-    {
-        //
-    }
 
     public function addToCart(int $product_id)
     {
@@ -85,7 +44,6 @@ class CartController extends Controller
             $usercart->products()->attach($product_id, ['quantity' => 1]);
         }
 
-        // return response()->json(['message' => 'Product added to cart successfully']);
-        return null;
+        return back();
     }
 }

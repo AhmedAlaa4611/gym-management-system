@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\PackageApiController;
+use App\Http\Controllers\Api\CartApiController;
 use App\Http\Controllers\Api\PackageUserApiController;
 use App\Http\Controllers\Api\PeriodController;
 use App\Http\Controllers\Api\ProductApiController;
@@ -45,6 +46,10 @@ Route::get('/package-user/show/{id}', [PackageUserApiController::class, 'show'])
 Route::put('/package-user/update/{id}', [PackageUserApiController::class, 'update']);
 Route::get('/package-user/delete/{id}', [PackageUserApiController::class, 'destroy']);
 
+// Cart
+Route::get('/cart', [CartApiController::class, 'index']);
+Route::get('/addtoCart/{id}', [CartApiController::class, 'addToCart']);
+
 Route::middleware('guest')->group(function () {
 
     Route::controller(RegisterController::class)->group(function () {
@@ -64,5 +69,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::controller(AuthController::class)->group(function () {
         Route::delete('/logout', 'destroy');
     });
+
 
 });

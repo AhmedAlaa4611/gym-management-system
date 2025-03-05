@@ -21,3 +21,4 @@ class EnsureUserIsStoreOwner
         return response()->json(['message' => 'Access denied. Only store owners are allowed.'], 403);
     }
 }
+
