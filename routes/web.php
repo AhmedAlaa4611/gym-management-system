@@ -9,6 +9,7 @@ use App\Http\Controllers\PackageUserController;
 use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\CartController;
 use App\Http\Middleware\EnsureUserIsAdmin;
 use Illuminate\Support\Facades\Route;
 
@@ -114,3 +115,7 @@ Route::controller(ServiceController::class)->group(function () {
     Route::put('/services/{id}', 'update')->name('service.update');
     Route::delete('/services/{id}', 'destroy')->name('service.destroy');
 });
+
+
+Route::get('/addToCart/{id}',[CartController::class,'addToCart']);
+Route::get('/carts',[CartController::class,'index']);

@@ -26,7 +26,6 @@ class PackageUserController extends Controller
     public function create()
     {
         $users = User::all();
-
         $packages = Package::all();
 
         return view('package_users.create', compact('users', 'packages'));
