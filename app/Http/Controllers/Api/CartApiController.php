@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Cart;
 
 class CartApiController extends Controller
@@ -11,16 +10,16 @@ class CartApiController extends Controller
     public function index()
     {
         $userId = auth()->id();
-        if (!$userId) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
+
         $cart = Cart::with('products')->where('user_id', $userId)->first();
-        if (!$cart) {
+
+        if (! $cart) {
             $cart = Cart::create(['user_id' => $userId]);
         }
+
         return response()->json([
             'message' => 'Cart retrieved successfully',
-            'cart' => $cart
+            'cart' => $cart,
         ], 200);
     }
 
@@ -30,13 +29,10 @@ class CartApiController extends Controller
     public function addToCart(int $product_id)
     {
         $userId = auth()->id();
-        if (!$userId) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
 
         $userCart = Cart::where('user_id', $userId)->first();
 
-        if (!$userCart) {
+        if (! $userCart) {
             $userCart = Cart::create(['user_id' => $userId]);
         }
 

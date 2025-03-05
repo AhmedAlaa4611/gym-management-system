@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
@@ -20,12 +19,12 @@ class CartController extends Controller
             return view('cart.show', compact('exsistcart'));
         } else {
             Cart::create([
-                'user_id'=>Auth::id(),
+                'user_id' => Auth::id(),
             ]);
+
             return view('cart.show', ['exsistcart' => collect([])]);
         }
     }
-
 
     public function addToCart(int $product_id)
     {

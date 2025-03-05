@@ -3,12 +3,13 @@
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\RegisterController;
-use App\Http\Controllers\Api\PackageApiController;
 use App\Http\Controllers\Api\CartApiController;
+use App\Http\Controllers\Api\PackageApiController;
 use App\Http\Controllers\Api\PackageUserApiController;
 use App\Http\Controllers\Api\PeriodController;
 use App\Http\Controllers\Api\ProductApiController;
 use App\Http\Controllers\Api\ServiceApiController;
+use App\Http\Middleware\EnsureUserIsCustomer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -51,8 +52,12 @@ Route::put('/services/update/{service}', [ServiceApiController::class, 'update']
 Route::delete('/services/{service}', [ServiceApiController::class, 'destroy'])->can('handle', 'service');
 
 // Cart
-Route::get('/cart', [CartApiController::class, 'index']);
-Route::get('/addtoCart/{id}', [CartApiController::class, 'addToCart']);
+Route::middleware(EnsureUserIsCustomer::class)->group(function () {
+
+    Route::get('/cart', [CartApiController::class, 'index']);
+    Route::get('/addtoCart/{id}', [CartApiController::class, 'addToCart']);
+
+});
 
 Route::middleware('guest')->group(function () {
 
@@ -73,6 +78,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::controller(AuthController::class)->group(function () {
         Route::delete('/logout', 'destroy');
     });
-
 
 });

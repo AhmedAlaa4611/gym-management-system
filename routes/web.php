@@ -11,6 +11,7 @@ use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Middleware\EnsureUserIsAdmin;
+use App\Http\Middleware\EnsureUserIsCustomer;
 use App\Http\Middleware\EnsureUserIsGymOwner;
 use App\Http\Middleware\EnsureUserIsStoreOwner;
 use Illuminate\Support\Facades\Route;
@@ -23,16 +24,18 @@ Route::get('/home', function () {
     return view('welcome');
 });
 
-Route::get('/welcome', function () {
-    return view('customer.welcome');
-});
+Route::middleware(EnsureUserIsCustomer::class)->group(function () {
+    Route::get('/welcome', function () {
+        return view('customer.welcome');
+    });
 
-Route::get('/gym', function () {
-    return view('customer.gym');
-});
+    Route::get('/gym', function () {
+        return view('customer.gym');
+    });
 
-Route::get('/product', function () {
-    return view('customer.product');
+    Route::get('/product', function () {
+        return view('customer.product');
+    });
 });
 
 Route::get('/forms', function () {

@@ -7,17 +7,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class EnsureUserIsStoreOwner
+class EnsureUserIsCustomer
 {
     /**
      * Handle an incoming request.
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->type === 'store_owner') {
+        if (Auth::user()->type === 'customer') {
             return $next($request);
         }
 
-        return response()->json(['message' => 'Access denied. Only store owners are allowed.'], 403);
+        abort(403, 'This action is unauthorized.');
     }
 }
