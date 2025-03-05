@@ -11,7 +11,7 @@ use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Middleware\EnsureUserIsAdmin;
-use App\Http\Middleware\EnsureGymOwner;
+use App\Http\Middleware\EnsureUserIsGymOwner;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -96,7 +96,8 @@ Route::controller(OrderProductController::class)->group(function () {
     Route::delete('/orderproducts/{id}', 'destroy')->name('orderproducts.destroy');
 });
 
-Route::middleware(['auth', EnsureGymOwner::class])->group(function () {
+Route::middleware(['auth', EnsureUserIsGymOwner::class])->group(function () {
+
     Route::controller(PeriodController::class)->group(function () {
         Route::get('/period', 'index')->name('period.index');
         Route::get('/period/create', 'create')->name('period.create');
@@ -107,7 +108,7 @@ Route::middleware(['auth', EnsureGymOwner::class])->group(function () {
         Route::delete('/period/{id}', 'destroy')->name('period.destroy');
         Route::get('/period/search', 'search')->name('period.search');
     });
-    
+
     Route::controller(ServiceController::class)->group(function () {
         Route::get('/services', 'index')->name('services.index');
         Route::get('/services/create', 'create')->name('service.create');
