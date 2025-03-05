@@ -41,40 +41,34 @@ class PackageApiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Package $package)
     {
-        $package = Package::find($id);
-
         return response()->json($package);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Package $package)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'duration' => 'required|integer',
             'price' => 'required|numeric|min:0',
         ]);
+
         $validatedData = $validator->validated();
-        if (Package::find($id) != null) {
-            $package = Package::find($id);
-            $package->update($validatedData);
 
-            return response()->json($package);
-        }
+        $package->update($validatedData);
 
-        return response()->json(['error' => 'package Does not Found']);
+        return response()->json($package);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Package $package)
     {
-        $package = Package::findOrFail($id);
         $package->delete();
 
         return response()->json(['message' => 'Deleted successfully'], 201);

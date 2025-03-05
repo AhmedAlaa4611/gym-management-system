@@ -26,7 +26,6 @@ class ServiceController extends Controller
      */
     public function create()
     {
-
         return view('services.create');
     }
 
@@ -58,10 +57,8 @@ class ServiceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Service $service)
     {
-        $service = Service::findOrFail($id);
-
         $users = User::all();
 
         return view('services.edit', compact('service', 'users'));
@@ -70,14 +67,12 @@ class ServiceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Service $service)
     {
         $data = $request->validate([
             'type' => 'required|in:doc,coach',
             'day' => ['required', Rule::in(WeekDays::get())],
         ]);
-
-        $service = Service::findOrFail($id);
 
         $service->update($data);
 
@@ -87,10 +82,8 @@ class ServiceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Service $service)
     {
-        $service = Service::findOrFail($id);
-
         $service->delete();
 
         return to_route('services.index');

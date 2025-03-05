@@ -59,17 +59,8 @@ class PeriodController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Period $period)
     {
-        $period = Period::with('user')->find($id);
-
-        if (! $period) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Class not found.',
-            ], Response::HTTP_NOT_FOUND);
-        }
-
         return response()->json([
             'success' => true,
             'data' => $period,
@@ -79,17 +70,8 @@ class PeriodController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Period $period)
     {
-        $period = Period::find($id);
-
-        if (! $period) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Class not found.',
-            ], Response::HTTP_NOT_FOUND);
-        }
-
         $validator = Validator::make($request->all(), [
             'name' => 'sometimes|required|string|max:255',
             'description' => 'sometimes|required|string|max:65535',
@@ -121,46 +103,13 @@ class PeriodController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Period $period)
     {
-        $period = Period::find($id);
-
-        if (! $period) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Class not found.',
-            ], Response::HTTP_NOT_FOUND);
-        }
-
         $period->delete();
 
         return response()->json([
             'success' => true,
             'message' => 'Class deleted successfully!',
         ], Response::HTTP_NO_CONTENT);
-    }
-
-    /**
-     * Search for periods by name.
-     */
-    public function search(Request $request)
-    {
-        $query = $request->input('query');
-
-        $periods = Period::with('user')
-            ->where('name', 'like', "%{$query}%")
-            ->get();
-
-        if ($periods->isEmpty()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'No results found.',
-            ], Response::HTTP_NOT_FOUND);
-        }
-
-        return response()->json([
-            'success' => true,
-            'data' => $periods,
-        ], Response::HTTP_OK);
     }
 }

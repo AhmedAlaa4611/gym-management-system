@@ -14,36 +14,32 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-// Resourceful API routes
-Route::apiResource('periods', PeriodController::class);
-
 // Additional API routes
-Route::get('periods/search', [PeriodController::class, 'search']);
 Route::post('/period', [PeriodController::class, 'store']);
 Route::get('/period/{id}', [PeriodController::class, 'show']);
-Route::match(['put', 'patch'], '/period/{id}', [PeriodController::class, 'update']);
-Route::delete('/period/{id}', [PeriodController::class, 'destroy']);
+Route::match(['put', 'patch'], '/period/{id}', [PeriodController::class, 'update'])->can('handle', 'period');
+Route::delete('/period/{period}', [PeriodController::class, 'destroy'])->can('handle', 'period');
 
 // Products
 Route::get('/products', [ProductApiController::class, 'index']);
 Route::post('/products/create', [ProductApiController::class, 'store']);
 Route::get('/products/show/{id}', [ProductApiController::class, 'show']);
 Route::put('/products/update/{id}', [ProductApiController::class, 'update']);
-Route::get('/products/delete/{id}', [ProductApiController::class, 'destroy']);
+Route::delete('/products/{id}', [ProductApiController::class, 'destroy']);
 
 // Package
 Route::get('/packages', [PackageApiController::class, 'index']);
 Route::post('/packages/create', [PackageApiController::class, 'store']);
-Route::get('/packages/show/{id}', [PackageApiController::class, 'show']);
-Route::put('/packages/update/{id}', [PackageApiController::class, 'update']);
-Route::get('/packages/delete/{id}', [PackageApiController::class, 'destroy']);
+Route::get('/packages/show/{package}', [PackageApiController::class, 'show']);
+Route::put('/packages/update/{package}', [PackageApiController::class, 'update']);
+Route::delete('/packages/{package}', [PackageApiController::class, 'destroy']);
 
 // Package_User
 Route::get('/package-user', [PackageUserApiController::class, 'index']);
 Route::post('/package-user/create', [PackageUserApiController::class, 'store']);
 Route::get('/package-user/show/{id}', [PackageUserApiController::class, 'show']);
 Route::put('/package-user/update/{id}', [PackageUserApiController::class, 'update']);
-Route::get('/package-user/delete/{id}', [PackageUserApiController::class, 'destroy']);
+Route::delete('/package-user/{id}', [PackageUserApiController::class, 'destroy']);
 
 Route::middleware('guest')->group(function () {
 

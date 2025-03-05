@@ -114,10 +114,9 @@ Route::middleware('auth')->group(function () {
             Route::get('/period/create', 'create')->name('period.create');
             Route::post('/period', 'store')->name('period.store');
             Route::get('/period/{id}', 'show')->name('period.show');
-            Route::get('/period/{id}/edit', 'edit')->name('period.edit');
-            Route::put('/period/{id}', 'update')->name('period.update');
-            Route::delete('/period/{id}', 'destroy')->name('period.destroy');
-            Route::get('/period/search', 'search')->name('period.search');
+            Route::get('/period/{period}/edit', 'edit')->name('period.edit')->can('handle', 'period');
+            Route::put('/period/{period}', 'update')->name('period.update')->can('handle', 'period');
+            Route::delete('/period/{period}', 'destroy')->name('period.destroy')->can('handle', 'period');
         });
 
         Route::controller(ServiceController::class)->group(function () {
@@ -125,9 +124,9 @@ Route::middleware('auth')->group(function () {
             Route::get('/services/create', 'create')->name('service.create');
             Route::post('/services', 'store')->name('service.store');
             Route::get('/services/{id}', 'show')->name('service.show');
-            Route::get('/services/{id}/edit', 'edit')->name('service.edit');
-            Route::put('/services/{id}', 'update')->name('service.update');
-            Route::delete('/services/{id}', 'destroy')->name('service.destroy');
+            Route::get('/services/{service}/edit', 'edit')->name('service.edit')->can('handle', 'service');
+            Route::put('/services/{service}', 'update')->name('service.update')->can('handle', 'service');
+            Route::delete('/services/{service}', 'destroy')->name('service.destroy')->can('handle', 'service');
         });
 
     });

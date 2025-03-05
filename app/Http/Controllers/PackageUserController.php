@@ -25,7 +25,8 @@ class PackageUserController extends Controller
      */
     public function create()
     {
-        $users = User::all();
+        $users = User::whereIn('type', ['store_owner', 'gym_owner'])->get();
+
         $packages = Package::all();
 
         return view('package_users.create', compact('users', 'packages'));
@@ -70,7 +71,7 @@ class PackageUserController extends Controller
      */
     public function edit(PackageUser $packageUser)
     {
-        $users = User::all();
+        $users = User::whereIn('type', ['store_owner', 'gym_owner'])->get();
 
         $packages = Package::all();
 

@@ -62,10 +62,8 @@ class PeriodController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Period $period)
     {
-        $period = Period::findOrFail($id);
-
         $users = User::all();
 
         return view('period.update', compact('period', 'users'));
@@ -74,7 +72,7 @@ class PeriodController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Period $period)
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
@@ -85,8 +83,6 @@ class PeriodController extends Controller
             'day' => ['required', Rule::in(WeekDays::get())],
         ]);
 
-        $period = Period::findOrFail($id);
-
         $period->update($data);
 
         return to_route('period.index')->with('success', 'Class updated successfully!');
@@ -95,27 +91,10 @@ class PeriodController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Period $period)
     {
-        $period = Period::findOrFail($id);
-
         $period->delete();
 
         return to_route('period.index')->with('success', 'Class deleted successfully!');
-    }
-
-    public function search(Request $request)
-    {
-        $query = $request->input('query');
-
-        $periods = Period::with('user')
-            ->where('name', 'like', "%{$query}%")
-            ->get();
-
-        if ($periods->isEmpty()) {
-            return to_route('period.index')->with('message', 'No results found.');
-        }
-
-        return view('period.index', compact('periods'));
     }
 }
