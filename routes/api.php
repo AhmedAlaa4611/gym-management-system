@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\PackageApiController;
 use App\Http\Controllers\Api\PackageUserApiController;
 use App\Http\Controllers\Api\PeriodController;
 use App\Http\Controllers\Api\ProductApiController;
+use App\Http\Controllers\Api\ServiceApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +46,7 @@ Route::get('/package-user/show/{id}', [PackageUserApiController::class, 'show'])
 Route::put('/package-user/update/{id}', [PackageUserApiController::class, 'update']);
 Route::get('/package-user/delete/{id}', [PackageUserApiController::class, 'destroy']);
 
+<<<<<<< HEAD
 Route::middleware('guest')->group(function () {
 
     Route::controller(RegisterController::class)->group(function () {
@@ -66,3 +68,11 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
 });
+=======
+// Service
+Route::get('/services', [ServiceApiController::class, 'index']);
+Route::post('/services/create', [ServiceApiController::class, 'store']);
+Route::get('/services/show/{id}', [ServiceApiController::class, 'show']);
+Route::put('/services/update/{id}', [ServiceApiController::class, 'update']);
+Route::get('/services/delete/{id}', [ServiceApiController::class, 'destroy']);
+>>>>>>> 9044fad (Added ServiceApiController changes)
