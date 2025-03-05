@@ -132,7 +132,9 @@ Route::middleware('auth')->group(function () {
 
     });
 
-    Route::get('/addToCart/{id}', [CartController::class, 'addToCart']);
-    Route::get('/carts', [CartController::class, 'index']);
+    Route::controller(CartController::class)->group(function () {
+        Route::get('/addToCart/{id}', 'addToCart');
+        Route::get('/carts', 'index');
+    });
 
 });
