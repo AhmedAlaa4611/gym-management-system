@@ -6,18 +6,47 @@ use App\Classes\WeekDays;
 use App\Http\Controllers\Controller;
 use App\Models\Period;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-
+use Carbon\Carbon;
 class PeriodController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $periods = Period::with('user')->get();
+        $userId = $request->query('user_id');
+
+        $query = Period::with('user');
+
+        if ($userId) {
+            $query->where('user_id', $userId);
+        }
+
+        $periods = Period::with('user')->get()->map(function ($period) {
+            $period->start_time = Carbon::parse($period->start_time)->format('H:i');
+            $period->end_time = Carbon::parse($period->end_time)->format('H:i');
+            return $period;
+        });
+
+        return response()->json([
+            'success' => true,
+            'data' => $periods,
+        ], Response::HTTP_OK);
+    }
+
+    public function getByUser($user_id)
+    {
+        $periods = Period::with('user')
+            ->where('user_id', $user_id)
+            ->get()
+            ->map(function ($period) {
+                $period->start_time = Carbon::parse($period->start_time)->format('H:i');
+                $period->end_time = Carbon::parse($period->end_time)->format('H:i');
+                return $period;
+            });
 
         return response()->json([
             'success' => true,
@@ -140,27 +169,4 @@ class PeriodController extends Controller
         ], Response::HTTP_NO_CONTENT);
     }
 
-    /**
-     * Search for periods by name.
-     */
-    public function search(Request $request)
-    {
-        $query = $request->input('query');
-
-        $periods = Period::with('user')
-            ->where('name', 'like', "%{$query}%")
-            ->get();
-
-        if ($periods->isEmpty()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'No results found.',
-            ], Response::HTTP_NOT_FOUND);
-        }
-
-        return response()->json([
-            'success' => true,
-            'data' => $periods,
-        ], Response::HTTP_OK);
-    }
 }

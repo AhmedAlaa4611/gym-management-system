@@ -13,13 +13,8 @@ Route::get('/user', function (Request $request) {
 
 // Resourceful API routes
 Route::apiResource('periods', PeriodController::class);
+Route::get('/periods/user/{user_id}', [PeriodController::class, 'getByUser']);
 
-// Additional API routes
-Route::get('periods/search', [PeriodController::class, 'search']);
-Route::post('/period', [PeriodController::class, 'store']);
-Route::get('/period/{id}', [PeriodController::class, 'show']);
-Route::match(['put', 'patch'], '/period/{id}', [PeriodController::class, 'update']);
-Route::delete('/period/{id}', [PeriodController::class, 'destroy']);
 
 // Products
 Route::get('/products', [ProductApiController::class, 'index']);

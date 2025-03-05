@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
+
 
 class Period extends Model
 {
@@ -28,4 +30,15 @@ class Period extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getStartTimeAttribute($value)
+    {
+        return Carbon::parse($value)->format('H:i');
+    }
+
+    public function getEndTimeAttribute($value)
+    {
+        return Carbon::parse($value)->format('H:i');
+    }
+
 }
