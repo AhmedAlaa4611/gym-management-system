@@ -9,9 +9,6 @@ use Illuminate\Support\Facades\Validator;
 
 class ServiceApiController extends Controller
 {
-    /**
-     * 
-     */
     public function index()
     {
         $services = Service::all();
@@ -19,9 +16,6 @@ class ServiceApiController extends Controller
         return response()->json($services);
     }
 
-    /**
-     * 
-     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -29,7 +23,7 @@ class ServiceApiController extends Controller
             'description' => 'required|string|max:65535',
             'price' => 'required|numeric|min:0.01',
             'duration' => 'required|integer|min:1',
-            'image' => ['nullable', 'image', 'max:2048'], 
+            'image' => ['nullable', 'image', 'max:2048'],
         ]);
 
         if ($validator->fails()) {
@@ -50,28 +44,16 @@ class ServiceApiController extends Controller
     /**
      * عرض خدمة معينة.
      */
-    public function show(string $id)
+    public function show(Service $service)
     {
-        $service = Service::find($id);
-
-        if (!$service) {
-            return response()->json(['error' => 'Service not found'], 404);
-        }
-
         return response()->json($service);
     }
 
     /**
      * تحديث بيانات الخدمة.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Service $service)
     {
-        $service = Service::find($id);
-
-        if (!$service) {
-            return response()->json(['error' => 'Service not found'], 404);
-        }
-
         $validator = Validator::make($request->all(), [
             'name' => 'sometimes|string|max:255',
             'description' => 'sometimes|string|max:65535',
@@ -98,14 +80,8 @@ class ServiceApiController extends Controller
     /**
      * حذف خدمة.
      */
-    public function destroy(string $id)
+    public function destroy(Service $service)
     {
-        $service = Service::find($id);
-
-        if (!$service) {
-            return response()->json(['error' => 'Service not found'], 404);
-        }
-
         $service->delete();
 
         return response()->json(['message' => 'Service deleted successfully']);

@@ -45,9 +45,9 @@ Route::delete('/package-user/{id}', [PackageUserApiController::class, 'destroy']
 // Service
 Route::get('/services', [ServiceApiController::class, 'index']);
 Route::post('/services/create', [ServiceApiController::class, 'store']);
-Route::get('/services/show/{id}', [ServiceApiController::class, 'show']);
-Route::put('/services/update/{id}', [ServiceApiController::class, 'update']);
-Route::get('/services/delete/{id}', [ServiceApiController::class, 'destroy']);
+Route::get('/services/show/{service}', [ServiceApiController::class, 'show']);
+Route::put('/services/update/{service}', [ServiceApiController::class, 'update'])->can('handle', 'service');
+Route::delete('/services/{service}', [ServiceApiController::class, 'destroy'])->can('handle', 'service');
 
 Route::middleware('guest')->group(function () {
 
