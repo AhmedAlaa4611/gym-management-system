@@ -3,13 +3,13 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderProductController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PackageUserController;
 use App\Http\Controllers\PeriodController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServiceController;
-use App\Http\Controllers\CartController;
 use App\Http\Middleware\EnsureUserIsAdmin;
 use Illuminate\Support\Facades\Route;
 
@@ -116,6 +116,5 @@ Route::controller(ServiceController::class)->group(function () {
     Route::delete('/services/{id}', 'destroy')->name('service.destroy');
 });
 
-
-Route::get('/addToCart/{id}',[CartController::class,'addToCart']);
-Route::get('/carts',[CartController::class,'index']);
+Route::get('/addToCart/{id}', [CartController::class, 'addToCart']);
+Route::get('/carts', [CartController::class, 'index']);

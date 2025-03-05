@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\PackageApiController;
+use App\Http\Controllers\Api\PackageUserApiController;
 use App\Http\Controllers\Api\PeriodController;
 use App\Http\Controllers\Api\ProductApiController;
-use App\Http\Controllers\Api\PackageUserApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

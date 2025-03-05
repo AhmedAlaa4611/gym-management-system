@@ -1,88 +1,121 @@
 .navbar-customer {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  z-index: 2;
-  background-color: rgba(0, 0, 0, 0.5);
-  transition: 0.6s ease-in-out;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: 0.6s ease-in-out;
 }
 
 .navbar-light {
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  box-shadow: 5px 4px 6px rgb(139, 66, 35);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    box-shadow: 5px 4px 6px rgb(139, 66, 35);
 }
 
 .navbar-brand-customer,
 .navbar-customer .nav-link {
-  font-family: 'Lato', sans-serif;
-  height: 40px;
-  line-height: 43px;
-  margin: 5px;
-  padding: 0px 22px;
-  display: flex;
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  color: #ffffff;
-  letter-spacing: 2px;
-  border-radius: 3px;
-  transition: 0.3s ease-in-out;
-  justify-content: center;
+    font-family: 'Lato', sans-serif;
+    height: 40px;
+    line-height: 43px;
+    margin: 5px;
+    padding: 0 22px;
+    display: flex;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    color: #ffffff;
+    letter-spacing: 2px;
+    border-radius: 3px;
+    transition: 0.3s ease-in-out;
+    justify-content: center;
 }
 
-.navbar-brand-customer{
-  color: rgb(139, 66, 35);
+.navbar-brand-customer {
+    color: rgb(139, 66, 35);
 }
 
 .navbar-customer .nav-link:hover {
-  background-color: #9a0909;
-  color: #ffffff;
-  box-shadow: 5px 10px 30px rgba(198, 64, 64, 0.411);
-  transition: all ease 0.2s;
+    background-color: #9a0909;
+    color: #ffffff;
+    box-shadow: 5px 10px 30px rgba(198, 64, 64, 0.411);
+    transition: all ease 0.2s;
 }
 
 .navbar-customer .nav-link:active {
-  box-shadow: 5px 10px 30px rgba(0, 0, 0, 0.157);
-  background-color: #000000;
+    box-shadow: 5px 10px 30px rgba(0, 0, 0, 0.157);
+    background-color: #000000;
 }
 
 .navbar-customer .nav-item .btn {
-  color: #f82525;
-  text-shadow: 0 1px 1px rgb(139, 66, 35);
-  font-size: 24px;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
+    color: #f82525;
+    text-shadow: 0 1px 1px rgb(139, 66, 35);
+    font-size: 24px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
 }
 
 .navbar-customer .nav-item .btn:hover {
-  color: white;
+    color: white;
 }
 
-.navbar-customer .dropdown-toggle::after{
-  color: red;
-  font-size: 1.5rem;
+.navbar-customer .dropdown-toggle::after {
+    color: red;
+    font-size: 1.5rem;
 }
-
-
 
 .btn-danger:hover {
-  background-color: transparent !important;
-  color: #ffffff !important;
-  border: 2px solid #FF1414 !important;
-  transition: all 0.5s ease;
+    background-color: transparent !important;
+    color: #ffffff !important;
+    border: 2px solid #FF1414 !important;
+    transition: all 0.5s ease;
 }
 
-.section-title span {color: #f36100;}
-.table-controls-gym ul {background: #000000; padding: 12px 30px; display: inline-block;}
-.table-controls-gym li {color: #aaaaaa; display: inline-block; margin-right: 35px; cursor: pointer;}
-.table-controls-gym li.active {color: #ffffff;}
-.table-gym {border: 1px solid #363636;}
-.table-gym thead th {background:#f36100; color: #ffffff; border-right: 1px solid #363636;}
-.table-gym tbody td {background: #090909; color: #ffffff;}
-.class-time {background: #000000; color: #f36100;}
-.hover-bg:hover {background: #f36100;}
+.section-title span {
+    color: #f36100;
+}
+
+.table-controls-gym ul {
+    background: #000000;
+    padding: 12px 30px;
+    display: inline-block;
+}
+
+.table-controls-gym li {
+    color: #aaaaaa;
+    display: inline-block;
+    margin-right: 35px;
+    cursor: pointer;
+}
+
+.table-controls-gym li.active {
+    color: #ffffff;
+}
+
+.table-gym {
+    border: 1px solid #363636;
+}
+
+.table-gym thead th {
+    background: #f36100;
+    color: #ffffff;
+    border-right: 1px solid #363636;
+}
+
+.table-gym tbody td {
+    background: #090909;
+    color: #ffffff;
+}
+
+.class-time {
+    background: #000000;
+    color: #f36100;
+}
+
+.hover-bg:hover {
+    background: #f36100;
+}

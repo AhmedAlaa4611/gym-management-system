@@ -6,7 +6,6 @@ use App\Models\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
 class CartController extends Controller
 {
     /**
@@ -14,25 +13,20 @@ class CartController extends Controller
      */
     public function index()
     {
-        $cart = Cart::where('user_id',Auth::id())->first();
-        if($cart != NULL)
-        {
+        $cart = Cart::where('user_id', Auth::id())->first();
+        if ($cart != null) {
             $exsistcart = $cart->products()->get();
-            return view('cart.show',compact('exsistcart'));
-        }
-        else
-        {
-            return view('cart.show',['exsistcart' => collect([])]);
+
+            return view('cart.show', compact('exsistcart'));
+        } else {
+            return view('cart.show', ['exsistcart' => collect([])]);
         }
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
@@ -52,7 +46,7 @@ class CartController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-    */
+     */
     public function edit(Cart $cart)
     {
         //
@@ -60,7 +54,7 @@ class CartController extends Controller
 
     /**
      * Update the specified resource in storage.
-    */
+     */
     public function update(Request $request, Cart $cart)
     {
         //
@@ -68,7 +62,7 @@ class CartController extends Controller
 
     /**
      * Remove the specified resource from storage.
-    */
+     */
     public function destroy(Cart $cart)
     {
         //
@@ -78,7 +72,7 @@ class CartController extends Controller
     {
         $usercart = Cart::where('user_id', Auth::id())->first();
 
-        if (!$usercart) {
+        if (! $usercart) {
             $usercart = Cart::create(['user_id' => Auth::id()]);
         }
 
@@ -92,7 +86,6 @@ class CartController extends Controller
         }
 
         // return response()->json(['message' => 'Product added to cart successfully']);
-        return NULL;
+        return null;
     }
-
 }

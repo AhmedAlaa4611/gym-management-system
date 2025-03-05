@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\PackageUser;
 use App\Models\Package;
+use App\Models\PackageUser;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Carbon\Carbon;
 
 class PackageUserApiController extends Controller
 {
@@ -26,7 +26,7 @@ class PackageUserApiController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'user_id' => 'required|exists:users,id',
             'package_id' => 'required|exists:packages,id',
             'from_at' => 'required|date',
@@ -47,7 +47,7 @@ class PackageUserApiController extends Controller
 
         return response()->json([
             'message' => 'Package assigned successfully',
-            'data' => $validated
+            'data' => $validated,
         ], 201);
     }
 
@@ -58,7 +58,7 @@ class PackageUserApiController extends Controller
     {
         $packageUser = PackageUser::find($id);
 
-        if (!$packageUser) {
+        if (! $packageUser) {
             return response()->json(['error' => 'PackageUser not found'], 404);
         }
 
@@ -72,11 +72,11 @@ class PackageUserApiController extends Controller
     {
         $packageUser = PackageUser::find($id);
 
-        if (!$packageUser) {
+        if (! $packageUser) {
             return response()->json(['error' => 'PackageUser not found'], 404);
         }
 
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'user_id' => 'required|exists:users,id',
             'package_id' => 'required|exists:packages,id',
             'from_at' => 'required|date',
@@ -87,7 +87,7 @@ class PackageUserApiController extends Controller
         $fromAt = Carbon::parse($validated['from_at']);
         $toAt = $fromAt->copy()->addDays($package->duration);
 
-        $packageuser= PackageUser::find($id);
+        $packageuser = PackageUser::find($id);
         $packageuser->update([
             'user_id' => $validated['user_id'],
             'package_id' => $validated['package_id'],
@@ -98,7 +98,7 @@ class PackageUserApiController extends Controller
 
         return response()->json([
             'message' => 'PackageUser updated successfully',
-            'data' => $packageuser
+            'data' => $packageuser,
         ]);
     }
 
@@ -109,7 +109,7 @@ class PackageUserApiController extends Controller
     {
         $packageUser = PackageUser::find($id);
 
-        if (!$packageUser) {
+        if (! $packageUser) {
             return response()->json(['error' => 'PackageUser not found'], 404);
         }
 
