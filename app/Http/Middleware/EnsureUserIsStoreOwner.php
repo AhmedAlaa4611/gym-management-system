@@ -18,6 +18,6 @@ class EnsureUserIsStoreOwner
             return $next($request);
         }
 
-        return response()->json(['message' => 'Access denied. Only gym owners are allowed.'], 403);
+        return response()->json(['message' => 'Access denied. Only store owners are allowed.'], 403);
     }
 }
