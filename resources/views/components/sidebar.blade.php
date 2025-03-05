@@ -8,7 +8,7 @@
         @if (Auth::check() && Auth::user()->type === 'admin')
             <x-sidebar-link href="/packages" :current-page="request()->is('packages')">📦Packages</x-sidebar-link>
             <x-sidebar-link href="/package_users" :current-page="request()->is('package_users')"> 📅Subscriptions</x-sidebar-link>
-            <x-sidebar-link href="/forms" :current-page="request()->is('services*')">Forms</x-sidebar-link>
+            <x-sidebar-link href="/forms" :current-page="request()->is('forms')">Forms</x-sidebar-link>
         @endif
 
         @if (Auth::check() && Auth::user()->type === 'gym_owner')
