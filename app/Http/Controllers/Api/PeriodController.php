@@ -6,7 +6,7 @@ use App\Classes\WeekDays;
 use App\Http\Controllers\Controller;
 use App\Models\Period;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
