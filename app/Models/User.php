@@ -58,4 +58,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Period::class);
     }
+
+    public function services()
+    {
+        return $this->hasMany(Service::class);
+    }
 }

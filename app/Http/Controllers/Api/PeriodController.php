@@ -110,6 +110,6 @@ class PeriodController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Class deleted successfully!',
-        ], Response::HTTP_NO_CONTENT);
+        ], 201);
     }
 }

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Classes\WeekDays;
 use App\Http\Controllers\Controller;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class ServiceApiController extends Controller
 {
@@ -25,11 +28,8 @@ class ServiceApiController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'description' => 'required|string|max:65535',
-            'price' => 'required|numeric|min:0.01',
-            'duration' => 'required|integer|min:1',
-            'image' => ['nullable', 'image', 'max:2048'],
+            'type' => 'required|in:doc,coach',
+            'day' => ['required', Rule::in(WeekDays::get())],
         ]);
 
         if ($validator->fails()) {
@@ -38,11 +38,7 @@ class ServiceApiController extends Controller
 
         $validatedData = $validator->validated();
 
-        if ($request->hasFile('image')) {
-            $validatedData['image'] = $request->file('image')->store('services', 'public');
-        }
-
-        $service = Service::create($validatedData);
+        $service = Auth::user()->services()->create($validatedData);
 
         return response()->json([
             'message' => 'Service created successfully',
@@ -64,11 +60,8 @@ class ServiceApiController extends Controller
     public function update(Request $request, Service $service)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'sometimes|string|max:255',
-            'description' => 'sometimes|string|max:65535',
-            'price' => 'sometimes|numeric|min:0.01',
-            'duration' => 'sometimes|integer|min:1',
-            'image' => ['nullable', 'image', 'max:2048'],
+            'type' => 'sometimes|required|in:doc,coach',
+            'day' => ['sometimes', 'required', Rule::in(WeekDays::get())],
         ]);
 
         if ($validator->fails()) {
@@ -76,10 +69,6 @@ class ServiceApiController extends Controller
         }
 
         $validatedData = $validator->validated();
-
-        if ($request->hasFile('image')) {
-            $validatedData['image'] = $request->file('image')->store('services', 'public');
-        }
 
         $service->update($validatedData);
 

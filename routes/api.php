@@ -51,8 +51,8 @@ Route::middleware('auth:sanctum')->group(function () {
         // Service
         Route::get('/services', [ServiceApiController::class, 'index']);
         Route::post('/services/create', [ServiceApiController::class, 'store']);
-        Route::get('/services/show/{service}', [ServiceApiController::class, 'show']);
-        Route::put('/services/update/{service}', [ServiceApiController::class, 'update'])->can('handle', 'service');
+        Route::get('/services/{service}', [ServiceApiController::class, 'show']);
+        Route::put('/services/{service}', [ServiceApiController::class, 'update'])->can('handle', 'service');
         Route::delete('/services/{service}', [ServiceApiController::class, 'destroy'])->can('handle', 'service');
     });
 
@@ -60,8 +60,8 @@ Route::middleware('auth:sanctum')->group(function () {
         // Products
         Route::get('/products', [ProductApiController::class, 'index']);
         Route::post('/products/create', [ProductApiController::class, 'store']);
-        Route::get('/products/show/{product}', [ProductApiController::class, 'show']);
-        Route::put('/products/update/{product}', [ProductApiController::class, 'update']);
+        Route::get('/products/{product}', [ProductApiController::class, 'show']);
+        Route::put('/products/{product}', [ProductApiController::class, 'update']);
         Route::delete('/products/{product}', [ProductApiController::class, 'destroy']);
     });
 
@@ -69,15 +69,15 @@ Route::middleware('auth:sanctum')->group(function () {
         // Package
         Route::get('/packages', [PackageApiController::class, 'index']);
         Route::post('/packages/create', [PackageApiController::class, 'store']);
-        Route::get('/packages/show/{package}', [PackageApiController::class, 'show']);
-        Route::put('/packages/update/{package}', [PackageApiController::class, 'update']);
+        Route::get('/packages/{package}', [PackageApiController::class, 'show']);
+        Route::put('/packages/{package}', [PackageApiController::class, 'update']);
         Route::delete('/packages/{package}', [PackageApiController::class, 'destroy']);
 
         // Package_User
         Route::get('/package-user', [PackageUserApiController::class, 'index']);
         Route::post('/package-user/create', [PackageUserApiController::class, 'store']);
-        Route::get('/package-user/show/{id}', [PackageUserApiController::class, 'show']);
-        Route::put('/package-user/update/{id}', [PackageUserApiController::class, 'update']);
+        Route::get('/package-user/{id}', [PackageUserApiController::class, 'show']);
+        Route::put('/package-user/{id}', [PackageUserApiController::class, 'update']);
         Route::delete('/package-user/{id}', [PackageUserApiController::class, 'destroy']);
     });
 
