@@ -6,9 +6,9 @@ use App\Classes\WeekDays;
 use App\Http\Controllers\Controller;
 use App\Models\Period;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Symfony\Component\HttpFoundation\Response;
 
 class PeriodController extends Controller
 {

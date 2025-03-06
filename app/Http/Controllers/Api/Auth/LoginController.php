@@ -38,9 +38,14 @@ class LoginController extends Controller
         $data = $validator->validated();
 
         if (Auth::attempt($data, $request->has('remember'))) {
+            $user = Auth::user();
+
+            $token = $user->createToken('auth_token')->plainTextToken;
+
             return response()->json([
                 'message' => 'Login successful',
-                'user' => Auth::user(),
+                'user' => $user,
+                'token' => $token,
             ], 200);
         }
 
