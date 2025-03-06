@@ -16,21 +16,19 @@
             <x-forms.error name="gender" />
         </div>
 
-        <x-forms.options name="type" :collection="['customer']">
-            Select a Type
-        </x-forms.options>
+        <x-forms.options name="type" :collection="['customer']">Select a Type</x-forms.options>
 
         <x-forms.input type="date" name="date_of_birth">Date of Birth</x-forms.input>
 
-        <x-forms.input type="text" name="phone" maxlength="11">Phone</x-forms.input>
-
-        <x-forms.textarea name="bio">Bio</x-forms.textarea>
+        <x-forms.input type="text" name="phone">Phone</x-forms.input>
 
         <x-forms.input type="file" name="image" accept="image/*">Profile Image</x-forms.input>
 
         <x-forms.input type="text" name="location">Location</x-forms.input>
 
         <x-forms.input type="text" name="visa">Visa</x-forms.input>
+
+        <x-forms.textarea name="bio">Bio</x-forms.textarea>
 
         <x-forms.submit>Register</x-forms.submit>
     </x-forms>
