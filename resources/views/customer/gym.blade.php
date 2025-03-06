@@ -1,5 +1,6 @@
 <x-layout>
     <x-slot:heading>Welcome to our Website</x-slot:heading>
+
     <div id="heroSlider" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
         <div class="carousel-inner">
             <div class="carousel-item active vh-100 bg-cover bg-center position-relative" style="background-image: url('/images/gym4.webp');">

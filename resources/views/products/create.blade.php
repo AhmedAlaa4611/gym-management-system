@@ -1,5 +1,5 @@
 <x-layout>
-    <x-slot name="heading">Create Product</x-slot>
+    <x-slot:heading>Create Product</x-slot:heading>
 
     <x-forms :action="route('products.store')">
         <x-forms.input name="name" type="text">Name</x-forms.input>

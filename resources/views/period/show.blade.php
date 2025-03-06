@@ -1,5 +1,5 @@
 <x-layout>
-    <x-slot name="heading">Class Details</x-slot>
+    <x-slot:heading>Class Details</x-slot:heading>
 
     <div class="row">
         <div class="col-sm-4 mb-4 mx-auto text-center">

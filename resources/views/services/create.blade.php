@@ -1,5 +1,5 @@
 <x-layout>
-    <x-slot name="heading">Create Service</x-slot>
+    <x-slot:heading>Create Service</x-slot:heading>
 
     <x-forms :action="route('service.store')">
         <x-forms.options name="type" :collection="['doc', 'coach']">Type</x-forms.options>

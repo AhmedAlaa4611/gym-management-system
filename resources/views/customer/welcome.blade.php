@@ -1,5 +1,6 @@
 <x-layout>
     <x-slot:heading>Welcome to our Website</x-slot:heading>
+
     <div id="home" class="position-relative vh-100 d-flex flex-column align-items-center justify-content-center text-white text-center py-5" style="background-image: url(/images/banner.png); background-size: cover; background-position: center; margin: 0;">
     <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(53, 27, 15, 0.374); z-index: -1;"></div>
         <h2 class="fw-bold mb-2 z-2">Hi Coach!</h2>

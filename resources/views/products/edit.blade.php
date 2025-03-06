@@ -1,5 +1,5 @@
 <x-layout>
-    <x-slot name="heading">Edit Product</x-slot>
+    <x-slot:heading>Edit Product</x-slot:heading>
 
     <x-forms :action="route('products.update', $product->id)">
         @method('PUT')

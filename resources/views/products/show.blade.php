@@ -1,5 +1,5 @@
 <x-layout>
-    <x-slot name="heading">Products</x-slot>
+    <x-slot:heading>Products</x-slot:heading>
 
     <div class="row">
         <div class="col-sm-4 mb-4 mx-auto">
