@@ -1,4 +1,4 @@
-<x-layout>
+<x-layouts.guest>
     <x-slot:heading>Login</x-slot:heading>
 
     <x-forms :action="route('login.create')">
@@ -13,4 +13,4 @@
 
         <x-forms.submit>Login</x-forms.submit>
     </x-forms>
-</x-layout>
+</x-layouts.guest>

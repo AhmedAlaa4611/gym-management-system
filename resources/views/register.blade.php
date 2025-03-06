@@ -1,4 +1,4 @@
-<x-layout>
+<x-layouts.guest>
     <x-slot:heading>Register</x-slot:heading>
 
     <x-forms :action="route('register.store')" enctype="multipart/form-data">
@@ -32,4 +32,4 @@
 
         <x-forms.submit>Register</x-forms.submit>
     </x-forms>
-</x-layout>
+</x-layouts.guest>
