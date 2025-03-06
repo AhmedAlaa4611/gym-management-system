@@ -24,20 +24,6 @@ Route::get('/home', function () {
     return view('welcome');
 });
 
-Route::middleware(EnsureUserIsCustomer::class)->group(function () {
-    Route::get('/welcome', function () {
-        return view('customer.welcome');
-    });
-
-    Route::get('/gym', function () {
-        return view('customer.gym');
-    });
-
-    Route::get('/product', function () {
-        return view('customer.product');
-    });
-});
-
 Route::get('/forms', function () {
     return view('admin.register');
 });
@@ -60,6 +46,20 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(AuthController::class)->group(function () {
         Route::delete('/logout', 'destroy')->name('logout');
+    });
+
+    Route::middleware(EnsureUserIsCustomer::class)->group(function () {
+        Route::get('/welcome', function () {
+            return view('customer.welcome');
+        });
+
+        Route::get('/gym', function () {
+            return view('customer.gym');
+        });
+
+        Route::get('/product', function () {
+            return view('customer.product');
+        });
     });
 
     Route::middleware(EnsureUserIsAdmin::class)->group(function () {

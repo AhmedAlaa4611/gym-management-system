@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Validator;
 
 class ServiceApiController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
         $services = Service::all();
@@ -16,6 +19,9 @@ class ServiceApiController extends Controller
         return response()->json($services);
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -38,11 +44,14 @@ class ServiceApiController extends Controller
 
         $service = Service::create($validatedData);
 
-        return response()->json(['message' => 'Service created successfully', 'data' => $service], 201);
+        return response()->json([
+            'message' => 'Service created successfully',
+            'data' => $service,
+        ], 201);
     }
 
     /**
-     * عرض خدمة معينة.
+     * Display the specified resource.
      */
     public function show(Service $service)
     {
@@ -50,7 +59,7 @@ class ServiceApiController extends Controller
     }
 
     /**
-     * تحديث بيانات الخدمة.
+     * Update the specified resource in storage.
      */
     public function update(Request $request, Service $service)
     {
@@ -78,7 +87,7 @@ class ServiceApiController extends Controller
     }
 
     /**
-     * حذف خدمة.
+     * Remove the specified resource from storage.
      */
     public function destroy(Service $service)
     {

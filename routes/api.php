@@ -18,17 +18,18 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 // Additional API routes
+Route::get('/period', [PeriodController::class, 'index']);
 Route::post('/period', [PeriodController::class, 'store']);
-Route::get('/period/{id}', [PeriodController::class, 'show']);
-Route::match(['put', 'patch'], '/period/{id}', [PeriodController::class, 'update'])->can('handle', 'period');
+Route::get('/period/{period}', [PeriodController::class, 'show']);
+Route::put('/period/{period}', [PeriodController::class, 'update'])->can('handle', 'period');
 Route::delete('/period/{period}', [PeriodController::class, 'destroy'])->can('handle', 'period');
 
 // Products
 Route::get('/products', [ProductApiController::class, 'index']);
 Route::post('/products/create', [ProductApiController::class, 'store']);
-Route::get('/products/show/{id}', [ProductApiController::class, 'show']);
-Route::put('/products/update/{id}', [ProductApiController::class, 'update']);
-Route::delete('/products/{id}', [ProductApiController::class, 'destroy']);
+Route::get('/products/show/{product}', [ProductApiController::class, 'show']);
+Route::put('/products/update/{product}', [ProductApiController::class, 'update']);
+Route::delete('/products/{product}', [ProductApiController::class, 'destroy']);
 
 // Package
 Route::get('/packages', [PackageApiController::class, 'index']);
@@ -52,7 +53,7 @@ Route::put('/services/update/{service}', [ServiceApiController::class, 'update']
 Route::delete('/services/{service}', [ServiceApiController::class, 'destroy'])->can('handle', 'service');
 
 // Cart
-Route::middleware(EnsureUserIsCustomer::class)->group(function () {
+Route::middleware(['auth:sanctum', EnsureUserIsCustomer::class])->group(function () {
 
     Route::get('/cart', [CartApiController::class, 'index']);
     Route::get('/addtoCart/{id}', [CartApiController::class, 'addToCart']);
