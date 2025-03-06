@@ -35,7 +35,9 @@ class LoginController extends Controller
             ], 400);
         }
 
-        if (Auth::attempt($validator, $request->has('remember'))) {
+        $data = $validator->validated();
+
+        if (Auth::attempt($data, $request->has('remember'))) {
             return response()->json([
                 'message' => 'Login successful',
                 'user' => Auth::user(),

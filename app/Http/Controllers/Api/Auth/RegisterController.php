@@ -46,6 +46,8 @@ class RegisterController extends Controller
             ], 400);
         }
 
+        $data = $validator->validated();
+
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('images', 'public');
         }
