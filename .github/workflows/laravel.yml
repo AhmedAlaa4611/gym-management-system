@@ -41,14 +41,14 @@ jobs:
     - name: Run Migrations
       run: php artisan migrate
 
+    - name: Run Security Audit
+      run: composer audit
+
     - name: Run Tests
       run: php artisan test
 
     - name: Run Pint
       run: vendor/bin/pint
 
-    # - name: Run Laravel Aspell
-    #   run: vendor/bin/peck
-
-    - name: Run Security Audit
-      run: composer audit
+    - name: Run Laravel Aspell
+      run: vendor/bin/peck
