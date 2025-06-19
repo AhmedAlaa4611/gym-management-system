@@ -50,5 +50,5 @@ jobs:
     - name: Run Pint
       run: vendor/bin/pint
 
-    - name: Run Laravel Aspell
+    - name: Run Aspell
       run: vendor/bin/peck
