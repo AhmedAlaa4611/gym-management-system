@@ -20,7 +20,7 @@ jobs:
         ini-values: post_max_size=256M, upload_max_filesize=256M
         coverage: none
 
-    - name: Install Dependencies
+    - name: Install Composer Dependencies
       run: composer install --prefer-dist --no-progress --no-suggest --no-interaction
 
     - name: Install Aspell
