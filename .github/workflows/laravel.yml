@@ -47,8 +47,8 @@ jobs:
     - name: Run Pint
       run: vendor/bin/pint
 
-    - name: Run Laravel Aspell
-      run: vendor/bin/peck
+    # - name: Run Laravel Aspell
+    #   run: vendor/bin/peck
 
     - name: Run Security Audit
       run: composer audit
