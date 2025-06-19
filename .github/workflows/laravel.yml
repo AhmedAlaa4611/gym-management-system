@@ -49,3 +49,6 @@ jobs:
 
     - name: Run Laravel Aspell
       run: vendor/bin/peck
+
+    - name: Run Security Audit
+      run: composer audit
